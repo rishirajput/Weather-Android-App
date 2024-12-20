@@ -13,3 +13,5 @@ val Pink40 = Color(0xFF7D5260)
 val onSurfaceColor = Color(0xFFC4C4C4)
 val highLightColor = Color(0xFFF2F2F2)
 val appFontColor = Color(0xFF2C2C2C)
+
+val appBackgroundColor = Color(0xFFFFFFFF)
