@@ -53,3 +53,12 @@ val textStyleNoCitySelected = TextStyle(
     textAlign = TextAlign.Center,
     color = appFontColor
 )
+
+val textStyleSearchCityLabel = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 15.sp,
+    fontWeight = FontWeight.W600,
+    lineHeight = 22.5.sp,
+    textAlign = TextAlign.Center,
+    color = appFontColor
+)
