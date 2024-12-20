@@ -25,10 +25,10 @@ import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.theme.highLightColor
 
 @Composable
-fun SearchBar(placeholderText: String) {
+fun SearchBar(placeholderText: String, modifier: Modifier = Modifier) {
     var searchQuery by remember { mutableStateOf("") }
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(46.dp)
             .background(highLightColor, shape = RoundedCornerShape(16.dp))
