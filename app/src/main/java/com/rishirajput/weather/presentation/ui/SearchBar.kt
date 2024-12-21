@@ -25,7 +25,11 @@ import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.theme.highLightColor
 
 @Composable
-fun SearchBar(placeholderText: String, modifier: Modifier = Modifier) {
+fun SearchBar(
+    placeholderText: String,
+    modifier: Modifier = Modifier,
+    onSearch: (String) -> Unit
+) {
     var searchQuery by remember { mutableStateOf("") }
     Row(
         modifier = modifier
@@ -37,7 +41,10 @@ fun SearchBar(placeholderText: String, modifier: Modifier = Modifier) {
     ) {
         BasicTextField(
             value = searchQuery,
-            onValueChange = { searchQuery = it },
+            onValueChange = {
+                searchQuery = it
+                onSearch(it)
+            },
             textStyle = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .weight(1f)
@@ -61,5 +68,5 @@ fun SearchBar(placeholderText: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchBar(stringResource(id = R.string.search_location))
+    SearchBar(stringResource(id = R.string.search_location), onSearch = {})
 }
