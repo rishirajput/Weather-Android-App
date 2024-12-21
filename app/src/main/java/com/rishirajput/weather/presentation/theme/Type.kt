@@ -62,3 +62,19 @@ val textStyleSearchCityLabel = TextStyle(
     textAlign = TextAlign.Center,
     color = appFontColor
 )
+
+val textStyleLoationName = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 20.sp,
+    fontWeight = FontWeight.W600,
+    lineHeight = 30.sp,
+    textAlign = TextAlign.Center
+)
+
+val textStyleCurrentTemperature = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 60.sp,
+    fontWeight = FontWeight.W500,
+    lineHeight = 90.sp,
+    textAlign = TextAlign.Left,
+)
