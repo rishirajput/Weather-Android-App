@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.theme.textStyleNoCitySelected
+import com.rishirajput.weather.presentation.theme.textStyleCityName
 import com.rishirajput.weather.presentation.theme.textStyleSearchCityLabel
 
 @Composable
@@ -31,7 +31,7 @@ fun NoCitySelected() {
         ) {
             Text(
                 text = stringResource(R.string.no_city_selected),
-                style = textStyleNoCitySelected,
+                style = textStyleCityName,
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(8.dp))
