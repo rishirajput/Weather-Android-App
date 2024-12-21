@@ -84,5 +84,23 @@ val textStyleTemperatureLarge = TextStyle(
     fontSize = 70.sp,
     fontWeight = FontWeight.W500,
     lineHeight = 105.sp,
-    textAlign = TextAlign.Center
+    textAlign = TextAlign.Center,
+)
+
+val textStyleMedium = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 15.sp,
+    fontWeight = FontWeight.W500,
+    lineHeight = 22.5.sp,
+    textAlign = TextAlign.Center,
+    color = onSurfaceColor
+)
+
+val textStyleSmall = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 12.sp,
+    fontWeight = FontWeight.W500,
+    lineHeight = 18.sp,
+    textAlign = TextAlign.Center,
+    color = onSurfaceColor
 )
