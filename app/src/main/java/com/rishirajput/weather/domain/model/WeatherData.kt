@@ -1,5 +1,8 @@
 package com.rishirajput.weather.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class WeatherData(
     val locationName: String,
     val temperature: Double,
