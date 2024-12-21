@@ -9,8 +9,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() {
-    private val _weatherData = MutableStateFlow<WeatherData?>(null)
-    val weatherData: StateFlow<WeatherData?> = _weatherData
+    private val _weatherData = MutableStateFlow<List<WeatherData>>(emptyList())
+    val weatherData: StateFlow<List<WeatherData>> = _weatherData
 
     fun fetchWeatherData(query: String) {
         viewModelScope.launch {
