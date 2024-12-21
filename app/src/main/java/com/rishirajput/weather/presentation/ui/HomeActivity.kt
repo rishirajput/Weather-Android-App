@@ -1,4 +1,4 @@
-package com.rishirajput.weather
+package com.rishirajput.weather.presentation.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -12,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.presentation.theme.WeatherTheme
-import com.rishirajput.weather.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun HomeEmptyStatePreview() {
+fun HomeActivityPreview() {
     WeatherTheme {
         HomeScreen(innerPadding = PaddingValues(0.dp))
     }
