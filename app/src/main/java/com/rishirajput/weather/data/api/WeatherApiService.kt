@@ -38,8 +38,9 @@ data class Condition(
 
 fun provideRetrofit(): Retrofit {
     val contentType = "application/json".toMediaType()
+    val json = Json { ignoreUnknownKeys = true }
     return Retrofit.Builder()
         .baseUrl("https://api.weatherapi.com/v1/")
-        .addConverterFactory(Json.asConverterFactory(contentType))
+        .addConverterFactory(json.asConverterFactory(contentType))
         .build()
 }
