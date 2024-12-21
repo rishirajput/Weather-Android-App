@@ -1,6 +1,5 @@
 package com.rishirajput.weather.presentation.viewmodel
 
-import androidx.datastore.core.DataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rishirajput.weather.domain.model.WeatherData
@@ -9,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
+import androidx.datastore.core.DataStore
 
 class WeatherViewModel(
     private val repository: WeatherRepository,
@@ -21,6 +21,9 @@ class WeatherViewModel(
     private val _selectedWeatherData = MutableStateFlow<WeatherData?>(null)
     val selectedWeatherData: StateFlow<WeatherData?> = _selectedWeatherData
 
+    private val _query = MutableStateFlow("")
+    val query: StateFlow<String> = _query
+
     init {
         viewModelScope.launch {
             _selectedWeatherData.value = dataStore.data.first()
@@ -28,6 +31,7 @@ class WeatherViewModel(
     }
 
     fun fetchWeatherData(query: String) {
+        _query.value = query
         viewModelScope.launch {
             val data = repository.getWeatherData(query)
             _weatherData.value = data
@@ -38,6 +42,7 @@ class WeatherViewModel(
         viewModelScope.launch {
             dataStore.updateData { data }
             _selectedWeatherData.value = data
+            _query.value = ""
         }
     }
 }

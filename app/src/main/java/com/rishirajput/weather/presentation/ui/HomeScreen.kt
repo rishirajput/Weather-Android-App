@@ -13,10 +13,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
@@ -27,9 +25,10 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
     val viewModel: WeatherViewModel = getViewModel()
-    var query by remember { mutableStateOf("") }
+    val query by viewModel.query.collectAsState()
     val weatherData by viewModel.weatherData.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
+    val focusManager = LocalFocusManager.current
 
     Column(
         modifier = Modifier
@@ -40,12 +39,13 @@ fun HomeScreen(innerPadding: PaddingValues) {
     ) {
         Spacer(modifier = Modifier.height(44.dp))
         SearchBar(
+            query,
             placeholderText = stringResource(id = R.string.search_location),
             modifier = Modifier.padding(4.dp),
-            onSearch = { query = it; viewModel.fetchWeatherData(it) }
+            onSearch = { viewModel.fetchWeatherData(it) }
         )
         Spacer(modifier = Modifier.height(32.dp))
-        if (selectedWeatherData != null) {
+        if (selectedWeatherData != null && query.isEmpty()) {
             LocationDetail(weatherData = selectedWeatherData!!)
         } else if (weatherData.isNotEmpty()) {
             LazyColumn(
@@ -53,7 +53,10 @@ fun HomeScreen(innerPadding: PaddingValues) {
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 items(weatherData) { data ->
-                    LocationResultCard(data, onClick = { viewModel.selectWeatherData(data) })
+                    LocationResultCard(data, onClick = {
+                        viewModel.selectWeatherData(data)
+                        focusManager.clearFocus()
+                    })
                 }
             }
         } else {

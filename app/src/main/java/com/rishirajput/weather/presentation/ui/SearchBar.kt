@@ -10,10 +10,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -24,11 +20,11 @@ import highlightedBackGround
 
 @Composable
 fun SearchBar(
+    query: String,
     placeholderText: String,
     modifier: Modifier = Modifier,
     onSearch: (String) -> Unit
 ) {
-    var searchQuery by remember { mutableStateOf("") }
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -38,9 +34,8 @@ fun SearchBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         BasicTextField(
-            value = searchQuery,
+            value = query,
             onValueChange = {
-                searchQuery = it
                 onSearch(it)
             },
             textStyle = MaterialTheme.typography.bodyLarge,
@@ -52,7 +47,7 @@ fun SearchBar(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.CenterStart
                 ) {
-                    if (searchQuery.isEmpty()) {
+                    if (query.isEmpty()) {
                         PlaceHolderText(text = placeholderText)
                     }
                     innerTextField()
@@ -66,5 +61,5 @@ fun SearchBar(
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchBar(stringResource(id = R.string.search_location), onSearch = {})
+    SearchBar("", stringResource(id = R.string.search_location), onSearch = {})
 }
