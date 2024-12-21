@@ -1,6 +1,7 @@
 package com.rishirajput.weather.ui
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -23,6 +24,8 @@ import com.rishirajput.weather.presentation.ui.SearchBar
 import com.rishirajput.weather.presentation.ui.LocationResultCard
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
@@ -45,9 +48,13 @@ fun HomeScreen(innerPadding: PaddingValues) {
         )
         Spacer(modifier = Modifier.height(32.dp))
         if (weatherData.isNotEmpty()) {
-            weatherData.forEach { data ->
-                LocationResultCard(data)
-                Spacer(modifier = Modifier.height(16.dp))
+            LazyColumn(
+                contentPadding = PaddingValues(vertical = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(weatherData) { data ->
+                    LocationResultCard(data)
+                }
             }
         } else {
             NoCitySelected()
