@@ -1,4 +1,4 @@
-package com.rishirajput.weather.ui
+package com.rishirajput.weather.presentation.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

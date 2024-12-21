@@ -1,4 +1,4 @@
-package com.rishirajput.weather.ui
+package com.rishirajput.weather.presentation.ui
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
