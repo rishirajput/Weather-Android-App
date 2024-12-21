@@ -78,3 +78,11 @@ val textStyleCurrentTemperature = TextStyle(
     lineHeight = 90.sp,
     textAlign = TextAlign.Left,
 )
+
+val textStyleTemperatureLarge = TextStyle(
+    fontFamily = poppinsFontFamily,
+    fontSize = 70.sp,
+    fontWeight = FontWeight.W500,
+    lineHeight = 105.sp,
+    textAlign = TextAlign.Center
+)
