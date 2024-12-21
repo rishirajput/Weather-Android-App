@@ -28,18 +28,7 @@ fun LocationDetail(weatherData: WeatherData) {
         Spacer(modifier = Modifier.height(11.dp))
         LocationName(locationName = weatherData.locationName, modifier = Modifier.align(Alignment.CenterHorizontally))
         Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            modifier = Modifier
-                .align(Alignment.CenterHorizontally)
-                .fillMaxWidth()
-                .highlightedBackGround()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            WeatherFieldInfo(label = "Humidity", value = "${weatherData.humidity}%")
-            WeatherFieldInfo(label = "UV", value =  "${weatherData.uvIndex}")
-            WeatherFieldInfo(label = "Feels Like", value = "${weatherData.feelsLike}°")
-        }
+        WeatherInfo(weatherData = weatherData, modifier = Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
