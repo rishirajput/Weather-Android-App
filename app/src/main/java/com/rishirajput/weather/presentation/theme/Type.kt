@@ -45,7 +45,7 @@ val AppTypography = Typography(
     ),
 )
 
-val textStyleNoCitySelected = TextStyle(
+val textStyleCityName = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 30.sp,
     fontWeight = FontWeight.W600,
