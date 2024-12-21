@@ -15,32 +15,3 @@ interface WeatherApiService {
         @Query("q") query: String
     ): WeatherResponse
 }
-
-@Serializable
-data class WeatherResponse(
-    val current: CurrentWeather
-)
-
-@Serializable
-data class CurrentWeather(
-    val temp_c: Double,
-    val condition: Condition,
-    val humidity: Int,
-    val uv: Double,
-    val feelslike_c: Double
-)
-
-@Serializable
-data class Condition(
-    val text: String,
-    val icon: String
-)
-
-fun provideRetrofit(): Retrofit {
-    val contentType = "application/json".toMediaType()
-    val json = Json { ignoreUnknownKeys = true }
-    return Retrofit.Builder()
-        .baseUrl("https://api.weatherapi.com/v1/")
-        .addConverterFactory(json.asConverterFactory(contentType))
-        .build()
-}
