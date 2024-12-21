@@ -1,6 +1,7 @@
 package com.rishirajput.weather.presentation.ui
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,11 +23,12 @@ import androidx.compose.ui.Alignment
 import com.rishirajput.weather.presentation.utils.updateImageSizeInUrl
 
 @Composable
-fun LocationResultCard(weatherData: WeatherData) {
+fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .highlightedBackGround()
+            .clickable(onClick = onClick)
             .padding(start = 16.dp, top = 16.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
@@ -68,5 +70,5 @@ fun PreviewLocationResult() {
         uvIndex = 0.1,
         feelsLike = 30.4
     )
-    LocationResultCard(weatherData = dummyWeatherData)
+    LocationResultCard(weatherData = dummyWeatherData) {}
 }
