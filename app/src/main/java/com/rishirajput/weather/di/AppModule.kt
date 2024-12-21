@@ -5,6 +5,7 @@ import com.rishirajput.weather.data.api.WeatherApiService
 import com.rishirajput.weather.data.repository.RetrofitWeatherRepository
 import com.rishirajput.weather.domain.repository.WeatherRepository
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -13,6 +14,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
+@OptIn(ExperimentalSerializationApi::class)
 fun provideRetrofit(): Retrofit {
     val contentType = "application/json".toMediaType()
     val json = Json { ignoreUnknownKeys = true }
