@@ -74,12 +74,12 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
                 val current = weatherResponse.current
                 WeatherData(
                     locationName = locationName,
-                    temperature = current.temp_c,
+                    temperature = current.tempC,
                     condition = current.condition.text,
                     icon = current.condition.icon,
                     humidity = current.humidity,
                     uvIndex = current.uv,
-                    feelsLike = current.feelslike_c
+                    feelsLike = current.feelsLikeC
                 )
             }
         } catch (e: IOException) {
