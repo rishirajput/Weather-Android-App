@@ -9,9 +9,11 @@ import com.rishirajput.weather.data.api.WeatherApiService
 import com.rishirajput.weather.data.repository.RetrofitWeatherRepository
 import com.rishirajput.weather.data.serializer.WeatherDataSerializer
 import com.rishirajput.domain.model.WeatherData
+import com.rishirajput.domain.repository.LocalStorageRepository
 import com.rishirajput.domain.repository.WeatherRepository
+import com.rishirajput.weather.data.repository.DataStoreRepository
 import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
-import com.rishirajput.weather.domain.usecase.SelectWeatherDataUseCase
+import com.rishirajput.weather.domain.usecase.StoreWeatherDataUseCase
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -26,8 +28,9 @@ val appModule = module {
     single { provideRetrofit().create(WeatherApiService::class.java) }
     single<WeatherRepository> { RetrofitWeatherRepository(get()) }
     single<DataStore<WeatherData?>> { provideDataStore(get()) }
+    single<LocalStorageRepository> { DataStoreRepository(get()) }
     single { FetchWeatherDataUseCase(get()) }
-    single { SelectWeatherDataUseCase(get()) }
+    single { StoreWeatherDataUseCase(get()) }
     viewModel { WeatherViewModel(get(), get()) }
 }
 
