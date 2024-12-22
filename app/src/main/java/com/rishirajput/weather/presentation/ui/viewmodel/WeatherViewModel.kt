@@ -2,6 +2,7 @@ package com.rishirajput.weather.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rishirajput.domain.model.Result
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
@@ -19,8 +20,8 @@ class WeatherViewModel(
     private val getCurrentWeatherDataUseCase: GetCurrentWeatherDataUseCase
 ) : ViewModel() {
 
-    private val _searchResults = MutableStateFlow<List<WeatherData>>(emptyList())
-    val searchResults: StateFlow<List<WeatherData>> = _searchResults
+    private val _searchResults = MutableStateFlow<Result<List<WeatherData>>>(Result.Success(emptyList()))
+    val searchResults: StateFlow<Result<List<WeatherData>>> = _searchResults
 
     private val _selectedWeatherData = MutableStateFlow<WeatherData?>(null)
     val selectedWeatherData: StateFlow<WeatherData?> = _selectedWeatherData
@@ -45,11 +46,12 @@ class WeatherViewModel(
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
             _isLoading.value = true
+            _searchResults.value = Result.Loading
             try {
-                val data = fetchWeatherDataUseCase(query)
-                _searchResults.value = data
+                val result = fetchWeatherDataUseCase(query)
+                _searchResults.value = result
             } catch (e: Exception) {
-                // Handle error
+                _searchResults.value = Result.Error(e)
             } finally {
                 _isLoading.value = false
             }

@@ -13,17 +13,25 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Response
+import com.rishirajput.domain.model.Result
 
 class RetrofitWeatherRepository(private val apiService: WeatherApiService) : WeatherRepository {
 
-    override suspend fun getWeatherData(query: String): List<WeatherData> {
+    override suspend fun getWeatherData(query: String): Result<List<WeatherData>> {
         if (query.isEmpty()) {
-            return emptyList()
+            return Result.Success(emptyList())
         }
+
         delay(Constants.DEBOUNCE_DELAY)
+
         return withContext(Dispatchers.IO) {
-            val locations = getLocations(query)
-            locations.map { getWeatherDataForLocation(it.name) }
+            try {
+                val locations = getLocations(query)
+                val weatherData = locations.map { getWeatherDataForLocation(it.name) }
+                Result.Success(weatherData)
+            } catch (e: Exception) {
+                Result.Error(e)
+            }
         }
     }
 
