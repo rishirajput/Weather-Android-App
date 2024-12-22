@@ -6,7 +6,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.rishirajput.data.Serializer.WeatherDataSerializer
+import com.rishirajput.data.serializer.WeatherDataSerializer
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.repository.DataStoreRepository
 import com.rishirajput.data.repository.RetrofitWeatherRepository

@@ -7,8 +7,4 @@ class StoreWeatherDataUseCase(private val localStorageRepository: LocalStorageRe
     suspend operator fun invoke(data: WeatherData) {
         localStorageRepository.storeWeatherData(data)
     }
-
-    suspend fun getSelectedWeatherData(): WeatherData? {
-        return localStorageRepository.getWeatherData()
-    }
 }

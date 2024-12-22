@@ -1,8 +1,10 @@
-package com.rishirajput.data.Serializer
+package com.rishirajput.data.serializer
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
 import com.rishirajput.domain.model.WeatherData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.InputStream
@@ -22,6 +24,8 @@ object WeatherDataSerializer : Serializer<WeatherData?> {
 
     override suspend fun writeTo(t: WeatherData?, output: OutputStream) {
         val json = Json.encodeToString(t)
-        output.write(json.encodeToByteArray())
+        withContext(Dispatchers.IO) {
+            output.write(json.encodeToByteArray())
+        }
     }
 }
