@@ -15,7 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.rishirajput.weather.domain.model.WeatherData
+import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.presentation.theme.textStyleCurrentTemperature
 import com.rishirajput.weather.presentation.theme.textStyleLoationName
 import highlightedBackGround

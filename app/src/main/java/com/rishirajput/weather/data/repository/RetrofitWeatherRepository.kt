@@ -2,11 +2,11 @@ package com.rishirajput.weather.data.repository
 
 import android.util.Log
 import com.rishirajput.weather.BuildConfig
-import com.rishirajput.weather.data.api.LocationResponse
+import com.rishirajput.domain.model.Location
 import com.rishirajput.weather.data.api.WeatherApiService
 import com.rishirajput.weather.data.api.WeatherResponse
-import com.rishirajput.weather.domain.model.WeatherData
-import com.rishirajput.weather.domain.repository.WeatherRepository
+import com.rishirajput.domain.model.WeatherData
+import com.rishirajput.domain.repository.WeatherRepository
 import retrofit2.HttpException
 import retrofit2.Response
 
@@ -17,13 +17,13 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
         return locations.map { getWeatherDataForLocation(it.name) }
     }
 
-    override suspend fun getLocations(query: String): List<LocationResponse> {
-        val locationResponse: Response<List<LocationResponse>> = apiService.searchLocation(BuildConfig.WEATHER_API_KEY, query)
-        if (!locationResponse.isSuccessful || locationResponse.body().isNullOrEmpty()) {
+    override suspend fun getLocations(query: String): List<Location> {
+        val location: Response<List<Location>> = apiService.searchLocation(BuildConfig.WEATHER_API_KEY, query)
+        if (!location.isSuccessful || location.body().isNullOrEmpty()) {
             Log.e("RetrofitWeatherRepository", "No matching location found for query: $query")
             return emptyList()
         }
-        return locationResponse.body()!!
+        return location.body()!!
     }
 
     override suspend fun getWeatherDataForLocation(locationName: String): WeatherData {

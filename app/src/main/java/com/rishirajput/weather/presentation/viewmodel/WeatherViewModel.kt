@@ -2,7 +2,7 @@ package com.rishirajput.weather.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rishirajput.weather.domain.model.WeatherData
+import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.weather.domain.usecase.SelectWeatherDataUseCase
 import com.rishirajput.weather.presentation.utils.Constants

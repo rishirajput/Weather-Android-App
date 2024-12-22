@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rishirajput.weather.domain.model.WeatherData
+import com.rishirajput.domain.model.WeatherData
 import highlightedBackGround
 
 @Composable

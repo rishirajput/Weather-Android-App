@@ -2,7 +2,7 @@ package com.rishirajput.weather.data.serializer
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer
-import com.rishirajput.weather.domain.model.WeatherData
+import com.rishirajput.domain.model.WeatherData
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.InputStream

@@ -1,9 +1,9 @@
-package com.rishirajput.weather.data.api
+package com.rishirajput.domain.model
 
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LocationResponse(
+data class Location(
     val id: Int,
     val name: String,
     val region: String,

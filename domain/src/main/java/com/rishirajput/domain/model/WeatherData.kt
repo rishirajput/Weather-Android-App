@@ -1,4 +1,4 @@
-package com.rishirajput.weather.domain.model
+package com.rishirajput.domain.model
 
 import kotlinx.serialization.Serializable
 

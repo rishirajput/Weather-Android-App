@@ -8,8 +8,8 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import com.rishirajput.weather.data.api.WeatherApiService
 import com.rishirajput.weather.data.repository.RetrofitWeatherRepository
 import com.rishirajput.weather.data.serializer.WeatherDataSerializer
-import com.rishirajput.weather.domain.model.WeatherData
-import com.rishirajput.weather.domain.repository.WeatherRepository
+import com.rishirajput.domain.model.WeatherData
+import com.rishirajput.domain.repository.WeatherRepository
 import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.weather.domain.usecase.SelectWeatherDataUseCase
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
