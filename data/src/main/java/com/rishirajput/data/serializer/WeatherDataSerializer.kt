@@ -10,6 +10,9 @@ import kotlinx.serialization.json.Json
 import java.io.InputStream
 import java.io.OutputStream
 
+/**
+ * Serializer for WeatherData using Kotlinx Serialization.
+ */
 object WeatherDataSerializer : Serializer<WeatherData?> {
     override val defaultValue: WeatherData? = null
 
