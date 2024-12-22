@@ -65,9 +65,11 @@ class WeatherViewModel(
                 if (result is Result.Success) {
                     _searchResults.value = result.data
                 } else if (result is Result.Error) {
+                    _searchResults.value = emptyList()
                     _errorFlow.emit(result.exception)
                 }
             } catch (e: Exception) {
+                _searchResults.value = emptyList()
                 _errorFlow.emit(e)
             } finally {
                 _isLoading.value = false
