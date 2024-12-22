@@ -10,8 +10,14 @@ import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
 import highlightedBackGround
 
+/**
+ * Composable function to display weather information.
+ *
+ * @param weatherData The weather data to display.
+ * @param modifier The modifier to be applied to the composable.
+ */
 @Composable
-fun WeatherInfo(weatherData: WeatherData, modifier: Modifier) {
+fun WeatherInfo(weatherData: WeatherData, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
