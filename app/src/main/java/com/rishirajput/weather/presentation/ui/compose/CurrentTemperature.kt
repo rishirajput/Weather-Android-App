@@ -10,19 +10,20 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.textStyleTemperatureLarge
 
 
 @Composable
-fun CurrentTemperature(temperature: Double, modifier: Modifier) {
+fun CurrentTemperature(temperature: Double, modifier: Modifier, textStyle: TextStyle = textStyleTemperatureLarge) {
     Row(
         modifier = modifier
     ) {
         Text(
             text = "$temperature",
-            style = textStyleTemperatureLarge,
+            style = textStyle,
             modifier = Modifier.align(Alignment.CenterVertically)
         )
         Spacer(modifier = Modifier.width(11.dp))

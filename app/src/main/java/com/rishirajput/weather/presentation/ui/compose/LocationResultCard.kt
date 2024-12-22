@@ -29,7 +29,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
             .fillMaxWidth()
             .highlightedBackGround()
             .clickable(onClick = onClick)
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp),
+            .padding(start = 30.dp, top = 16.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -38,12 +38,10 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
                 text = weatherData.locationName,
                 style = textStyleLoationName
             )
-            Text(
-                text = "${weatherData.temperature}°",
-                style = textStyleCurrentTemperature,
-                modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
-
+            CurrentTemperature(
+                temperature = weatherData.temperature,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                textStyle = textStyleCurrentTemperature
             )
         }
         val painter = rememberAsyncImagePainter(model = updateImageSizeInUrl("https:${weatherData.icon}", 128))
@@ -62,7 +60,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
 @Composable
 fun PreviewLocationResult() {
     val dummyWeatherData = WeatherData(
-        locationName = "Airport Village",
+        locationName = "LakeFront Airport",
         temperature = 27.3,
         condition = "Patchy rain nearby",
         icon = "//cdn.weatherapi.com/weather/64x64/night/176.png",
