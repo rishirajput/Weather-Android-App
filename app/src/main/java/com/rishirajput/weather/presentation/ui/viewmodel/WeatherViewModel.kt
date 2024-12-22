@@ -7,12 +7,13 @@ import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import com.rishirajput.weather.domain.usecase.GetCurrentWeatherDataUseCase
-import com.rishirajput.weather.presentation.ui.utils.Constants
+import com.rishirajput.data.utils.Constants
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
     private val storeWeatherDataUseCase: StoreWeatherDataUseCase,
@@ -45,20 +46,14 @@ class WeatherViewModel(
         _query.value = query
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
-            delay(Constants.DEBOUNCE_DELAY)
-            if (query.isEmpty()) {
-                _searchResults.value = emptyList()
-                return@launch
-            } else {
-                _isLoading.value = true
-                try {
-                    val data = fetchWeatherDataUseCase(query)
-                    _searchResults.value = data
-                } catch (e: Exception) {
-                    // Handle error
-                } finally {
-                    _isLoading.value = false
-                }
+            _isLoading.value = true
+            try {
+                val data = fetchWeatherDataUseCase(query)
+                _searchResults.value = data
+            } catch (e: Exception) {
+                // Handle error
+            } finally {
+                _isLoading.value = false
             }
         }
     }

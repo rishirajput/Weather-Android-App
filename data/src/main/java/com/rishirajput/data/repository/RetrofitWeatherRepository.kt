@@ -4,17 +4,27 @@ import android.util.Log
 import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.api.WeatherResponse
+import com.rishirajput.data.utils.Constants
 import com.rishirajput.domain.model.Location
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.WeatherRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Response
 
 class RetrofitWeatherRepository(private val apiService: WeatherApiService) : WeatherRepository {
 
     override suspend fun getWeatherData(query: String): List<WeatherData> {
-        val locations = getLocations(query)
-        return locations.map { getWeatherDataForLocation(it.name) }
+        if (query.isEmpty()) {
+            return emptyList()
+        }
+        delay(Constants.DEBOUNCE_DELAY)
+        return withContext(Dispatchers.IO) {
+            val locations = getLocations(query)
+            locations.map { getWeatherDataForLocation(it.name) }
+        }
     }
 
     override suspend fun getLocations(query: String): List<Location> {
