@@ -4,4 +4,7 @@
     <string name="no_city_selected">No City Selected</string>
     <string name="please_search_for_a_city">Please Search For A City</string>
     <string name="error_message">Oops! Something went wrong.</string>
+    <string name="network_error">Network error: Please check your internet connection.</string>
+    <string name="not_found_error">Error! Data Not Found.</string>
+    <string name="invalid_city_name">Invalid City Name</string>
 </resources>
