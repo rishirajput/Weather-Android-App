@@ -15,9 +15,19 @@ import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.textStyleTemperatureLarge
 
-
+/**
+ * Composable function to display the current temperature with a degree icon.
+ *
+ * @param temperature The current temperature to display.
+ * @param modifier The modifier to be applied to the Row layout.
+ * @param textStyle The text style to be applied to the temperature text.
+ */
 @Composable
-fun CurrentTemperature(temperature: Double, modifier: Modifier, textStyle: TextStyle = textStyleTemperatureLarge) {
+fun CurrentTemperature(
+    temperature: Double,
+    modifier: Modifier = Modifier,
+    textStyle: TextStyle = textStyleTemperatureLarge
+) {
     Row(
         modifier = modifier
     ) {
