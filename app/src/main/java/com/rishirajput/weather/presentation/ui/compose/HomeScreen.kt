@@ -10,9 +10,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
@@ -28,6 +30,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
     val query by viewModel.query.collectAsState()
     val weatherData by viewModel.searchResults.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
+    val isLoading by viewModel.isLoading.collectAsState()
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -45,22 +48,26 @@ fun HomeScreen(innerPadding: PaddingValues) {
             onSearch = { viewModel.fetchWeatherData(it) }
         )
         Spacer(modifier = Modifier.height(32.dp))
-        if (selectedWeatherData != null && query.isEmpty()) {
-            LocationDetail(weatherData = selectedWeatherData!!)
-        } else if (weatherData.isNotEmpty()) {
-            LazyColumn(
-                contentPadding = PaddingValues(vertical = 16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(weatherData) { data ->
-                    LocationResultCard(data, onClick = {
-                        viewModel.selectWeatherData(data)
-                        focusManager.clearFocus()
-                    })
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+        } else {
+            if (selectedWeatherData != null && query.isEmpty()) {
+                LocationDetail(weatherData = selectedWeatherData!!)
+            } else if (weatherData.isNotEmpty()) {
+                LazyColumn(
+                    contentPadding = PaddingValues(vertical = 16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    items(weatherData) { data ->
+                        LocationResultCard(data, onClick = {
+                            viewModel.selectWeatherData(data)
+                            focusManager.clearFocus()
+                        })
+                    }
                 }
+            } else if (query.isEmpty()) {
+                NoCitySelected()
             }
-        } else if(query.isEmpty()) {
-            NoCitySelected()
         }
     }
 }

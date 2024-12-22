@@ -13,7 +13,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
     private val storeWeatherDataUseCase: StoreWeatherDataUseCase,
@@ -29,6 +28,9 @@ class WeatherViewModel(
 
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
+
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
 
     private var fetchJob: Job? = null
 
@@ -48,8 +50,15 @@ class WeatherViewModel(
                 _searchResults.value = emptyList()
                 return@launch
             } else {
-                val data = fetchWeatherDataUseCase(query)
-                _searchResults.value = data
+                _isLoading.value = true
+                try {
+                    val data = fetchWeatherDataUseCase(query)
+                    _searchResults.value = data
+                } catch (e: Exception) {
+                    // Handle error
+                } finally {
+                    _isLoading.value = false
+                }
             }
         }
     }
