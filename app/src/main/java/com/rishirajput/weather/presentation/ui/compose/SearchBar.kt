@@ -18,6 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
 import highlightedBackGround
 
+/**
+ * Composable function to display a search bar.
+ *
+ * @param query The current search query.
+ * @param placeholderText The text to display as a placeholder.
+ * @param modifier The modifier to be applied to the composable.
+ * @param onSearch The action to perform when the search query changes.
+ */
 @Composable
 fun SearchBar(
     query: String,
@@ -35,9 +43,7 @@ fun SearchBar(
     ) {
         BasicTextField(
             value = query,
-            onValueChange = {
-                onSearch(it)
-            },
+            onValueChange = onSearch,
             textStyle = MaterialTheme.typography.bodyLarge,
             modifier = Modifier
                 .weight(1f)
@@ -58,8 +64,15 @@ fun SearchBar(
     }
 }
 
+/**
+ * Preview function for SearchBar composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchBar("", stringResource(id = R.string.search_location), onSearch = {})
+    SearchBar(
+        query = "",
+        placeholderText = stringResource(id = R.string.search_location),
+        onSearch = {}
+    )
 }
