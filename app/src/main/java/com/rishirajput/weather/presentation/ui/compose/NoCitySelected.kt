@@ -18,11 +18,13 @@ import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.textStyleCityName
 import com.rishirajput.weather.presentation.ui.theme.textStyleSearchCityLabel
 
+/**
+ * Composable function to display a message when no city is selected.
+ */
 @Composable
-fun NoCitySelected() {
+fun NoCitySelected(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier
-            .fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Column(
@@ -44,6 +46,9 @@ fun NoCitySelected() {
     }
 }
 
+/**
+ * Preview function for NoCitySelected composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun NoCitySelectedPreview() {
