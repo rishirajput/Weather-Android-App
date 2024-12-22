@@ -49,7 +49,6 @@ fun HomeScreenContent(
             modifier = Modifier.padding(24.dp),
             onSearch = onSearch
         )
-        Spacer(modifier = Modifier.height(32.dp))
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         } else {
@@ -62,7 +61,8 @@ fun HomeScreenContent(
                     LocationResults(
                         searchResults = searchResults,
                         onLocationClick = onLocationClick,
-                        focusManager = focusManager
+                        focusManager = focusManager,
+                        modifier = Modifier.padding(horizontal = 16.dp)
                     )
                 }
 
