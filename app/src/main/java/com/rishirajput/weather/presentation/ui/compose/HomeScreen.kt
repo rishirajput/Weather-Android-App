@@ -27,7 +27,7 @@ import org.koin.androidx.compose.getViewModel
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
     val viewModel: WeatherViewModel = getViewModel()
-    val query by viewModel.query.collectAsState()
+    val searchQuery by viewModel.searchQuery.collectAsState()
     val searchResults by viewModel.searchResults.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
@@ -42,7 +42,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
             .padding(start = 20.dp, end = 20.dp)
     ) {
         Spacer(modifier = Modifier.height(44.dp))
-        SearchBar(query,
+        SearchBar(searchQuery,
             placeholderText = stringResource(id = R.string.search_location),
             modifier = Modifier.padding(4.dp),
             onSearch = { viewModel.fetchWeatherData(it) })
@@ -50,7 +50,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
         if (isLoading) {
             CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
         } else {
-            if (selectedWeatherData != null && query.isEmpty()) {
+            if (selectedWeatherData != null && searchQuery.isEmpty()) {
                 LocationDetail(weatherData = selectedWeatherData!!)
             } else if (searchResults.isNotEmpty()) {
                 LocationResults(
@@ -58,7 +58,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
                     onLocationClick = { data -> viewModel.selectWeatherData(data) },
                     focusManager = focusManager
                 )
-            } else if (query.isEmpty()) {
+            } else if (searchQuery.isEmpty()) {
                 NoCitySelected()
             }
         }

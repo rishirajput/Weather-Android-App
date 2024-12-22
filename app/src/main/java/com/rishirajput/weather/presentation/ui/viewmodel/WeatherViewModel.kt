@@ -27,8 +27,8 @@ class WeatherViewModel(
     private val _selectedWeatherData = MutableStateFlow<WeatherData?>(null)
     val selectedWeatherData: StateFlow<WeatherData?> = _selectedWeatherData
 
-    private val _query = MutableStateFlow("")
-    val query: StateFlow<String> = _query
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery
 
     private val _errorFlow = MutableSharedFlow<String>()
     val errorFlow: SharedFlow<String> = _errorFlow
@@ -51,7 +51,7 @@ class WeatherViewModel(
     }
 
     fun fetchWeatherData(query: String) {
-        _query.value = query
+        _searchQuery.value = query
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
             _isLoading.value = true
@@ -74,7 +74,7 @@ class WeatherViewModel(
         viewModelScope.launch {
             storeWeatherDataUseCase(data)
             _selectedWeatherData.value = data
-            _query.value = ""
+            _searchQuery.value = ""
         }
     }
 }
