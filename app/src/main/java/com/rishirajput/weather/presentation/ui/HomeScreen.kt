@@ -26,7 +26,7 @@ import org.koin.androidx.compose.getViewModel
 fun HomeScreen(innerPadding: PaddingValues) {
     val viewModel: WeatherViewModel = getViewModel()
     val query by viewModel.query.collectAsState()
-    val weatherData by viewModel.weatherData.collectAsState()
+    val weatherData by viewModel.searchResults.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
     val focusManager = LocalFocusManager.current
 
