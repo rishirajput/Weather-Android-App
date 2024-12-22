@@ -16,7 +16,11 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-        buildConfigField("String", "WEATHER_API_KEY", "\"${project.findProperty("weatherApiKey") ?: ""}\"")
+        buildConfigField(
+            "String",
+            "WEATHER_API_KEY",
+            "\"${project.findProperty("weatherApiKey") ?: ""}\""
+        )
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -43,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
     implementation(libs.coil)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging.interceptor)
