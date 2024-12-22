@@ -2,18 +2,18 @@ package com.rishirajput.weather.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rishirajput.domain.model.Result
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
+import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
-import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharedFlow
-import com.rishirajput.domain.model.Result
 
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
@@ -31,8 +31,8 @@ class WeatherViewModel(
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
 
-    private val _errorFlow = MutableSharedFlow<String>()
-    val errorFlow: SharedFlow<String> = _errorFlow
+    private val _errorFlow = MutableSharedFlow<Throwable>()
+    val errorFlow: SharedFlow<Throwable> = _errorFlow
 
     private val _isLoading = MutableStateFlow(false)
     val isLoading: StateFlow<Boolean> = _isLoading
@@ -44,11 +44,12 @@ class WeatherViewModel(
             _selectedWeatherData.value = getSelectedWeatherDataUseCase()
             when (val result = getCurrentWeatherDataUseCase(_selectedWeatherData.value)) {
                 is Result.Success -> _selectedWeatherData.value = result.data
-                is Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
+                is Result.Error -> _errorFlow.emit(result.exception)
                 Result.Loading -> { /* Handle loading state if needed */
                 }
 
                 null -> {
+                    _errorFlow.emit(NullPointerException())
                 }
             }
         }
@@ -64,10 +65,10 @@ class WeatherViewModel(
                 if (result is Result.Success) {
                     _searchResults.value = result.data
                 } else if (result is Result.Error) {
-                    _errorFlow.emit(result.exception.message ?: "Unknown error")
+                    _errorFlow.emit(result.exception)
                 }
             } catch (e: Exception) {
-                _errorFlow.emit(e.message ?: "Unknown error")
+                _errorFlow.emit(e)
             } finally {
                 _isLoading.value = false
             }

@@ -5,6 +5,8 @@ import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.api.WeatherResponse
 import com.rishirajput.data.utils.Constants
+import com.rishirajput.domain.errors.InvalidCityException
+import com.rishirajput.domain.errors.NoNetworkException
 import com.rishirajput.domain.model.Location
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.WeatherRepository
@@ -14,6 +16,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Response
 import com.rishirajput.domain.model.Result
+import java.io.IOException
 
 class RetrofitWeatherRepository(private val apiService: WeatherApiService) : WeatherRepository {
 
@@ -28,18 +31,23 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
             try {
                 val locationsResult = getLocations(query)
                 if (locationsResult is Result.Success) {
+                    if (locationsResult.data.isEmpty()) {
+                        return@withContext Result.Error(InvalidCityException())
+                    }
                     val weatherData = locationsResult.data.map { location ->
                         val weatherResult = getWeatherDataForLocation(location.name)
                         if (weatherResult is Result.Success) {
                             weatherResult.data
                         } else {
-                            throw (weatherResult as Result.Error).exception
+                            return@withContext Result.Error((weatherResult as Result.Error).exception)
                         }
                     }
                     Result.Success(weatherData)
                 } else {
-                    throw (locationsResult as Result.Error).exception
+                    Result.Error((locationsResult as Result.Error).exception)
                 }
+            } catch (e: IOException) {
+                Result.Error(NoNetworkException())
             } catch (e: Exception) {
                 Result.Error(e)
             }
@@ -55,6 +63,8 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
             } else {
                 Result.Success(location.body()!!)
             }
+        } catch (e: IOException) {
+            Result.Error(NoNetworkException())
         } catch (e: Exception) {
             Result.Error(e)
         }
@@ -79,6 +89,8 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
                 Log.e("RetrofitWeatherRepository", "HTTP error: ${weatherResponse.code()} ${weatherResponse.message()}")
                 Result.Error(HttpException(weatherResponse))
             }
+        } catch (e: IOException) {
+            Result.Error(NoNetworkException())
         } catch (e: Exception) {
             Log.e("RetrofitWeatherRepository", "Error fetching weather data", e)
             Result.Error(e)
