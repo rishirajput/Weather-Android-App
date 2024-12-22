@@ -26,5 +26,4 @@ fun ErrorSnackBar(snackBarHostState: SnackbarHostState, errorFlow: Flow<Throwabl
             snackBarHostState.showSnackbar(errorMessage)
         }
     }
-    SnackbarHost(hostState = snackBarHostState)
 }

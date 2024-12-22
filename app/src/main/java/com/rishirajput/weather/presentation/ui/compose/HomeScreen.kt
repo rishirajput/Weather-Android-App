@@ -1,6 +1,7 @@
 package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -8,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -34,35 +36,43 @@ fun HomeScreen(innerPadding: PaddingValues) {
     val focusManager = LocalFocusManager.current
     val snackBarHostState = remember { SnackbarHostState() }
 
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
             .background(appBackgroundColor)
             .padding(innerPadding)
-            .padding(start = 20.dp, end = 20.dp)
     ) {
-        Spacer(modifier = Modifier.height(44.dp))
-        SearchBar(searchQuery,
-            placeholderText = stringResource(id = R.string.search_location),
-            modifier = Modifier.padding(4.dp),
-            onSearch = { viewModel.fetchWeatherData(it) })
-        Spacer(modifier = Modifier.height(32.dp))
-        if (isLoading) {
-            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-        } else {
-            if (selectedWeatherData != null && searchQuery.isEmpty()) {
-                LocationDetail(weatherData = selectedWeatherData!!)
-            } else if (searchResults.isNotEmpty()) {
-                LocationResults(
-                    searchResults = searchResults,
-                    onLocationClick = { data -> viewModel.selectWeatherData(data) },
-                    focusManager = focusManager
-                )
-            } else if (searchQuery.isEmpty()) {
-                NoCitySelected()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(start = 20.dp, end = 20.dp)
+        ) {
+            Spacer(modifier = Modifier.height(44.dp))
+            SearchBar(searchQuery,
+                placeholderText = stringResource(id = R.string.search_location),
+                modifier = Modifier.padding(4.dp),
+                onSearch = { viewModel.fetchWeatherData(it) })
+            Spacer(modifier = Modifier.height(32.dp))
+            if (isLoading) {
+                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+            } else {
+                if (selectedWeatherData != null && searchQuery.isEmpty()) {
+                    LocationDetail(weatherData = selectedWeatherData!!)
+                } else if (searchResults.isNotEmpty()) {
+                    LocationResults(
+                        searchResults = searchResults,
+                        onLocationClick = { data -> viewModel.selectWeatherData(data) },
+                        focusManager = focusManager
+                    )
+                } else if (searchQuery.isEmpty()) {
+                    NoCitySelected()
+                }
             }
         }
         ErrorSnackBar(snackBarHostState = snackBarHostState, errorFlow = viewModel.errorFlow)
+        SnackbarHost(
+            hostState = snackBarHostState,
+            modifier = Modifier.align(Alignment.BottomCenter)
+        )
     }
 }
-
