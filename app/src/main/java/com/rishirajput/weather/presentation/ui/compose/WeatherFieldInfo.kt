@@ -9,9 +9,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.rishirajput.weather.presentation.ui.theme.textStyleMedium
 import com.rishirajput.weather.presentation.ui.theme.textStyleSmall
 
+/**
+ * Composable function to display weather field information.
+ *
+ * @param label The label for the weather field.
+ * @param value The value for the weather field.
+ */
 @Composable
 fun WeatherFieldInfo(label: String, value: String) {
-    Column {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
         Text(
             text = label,
             style = textStyleSmall,
@@ -25,6 +31,9 @@ fun WeatherFieldInfo(label: String, value: String) {
     }
 }
 
+/**
+ * Preview function for WeatherFieldInfo composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun PreviewWeatherFieldInfo() {
