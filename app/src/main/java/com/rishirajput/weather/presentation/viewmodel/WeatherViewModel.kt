@@ -3,19 +3,18 @@ package com.rishirajput.weather.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rishirajput.weather.domain.model.WeatherData
-import com.rishirajput.weather.domain.repository.WeatherRepository
+import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
+import com.rishirajput.weather.domain.usecase.SelectWeatherDataUseCase
+import com.rishirajput.weather.presentation.utils.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
-import androidx.datastore.core.DataStore
-import com.rishirajput.weather.presentation.utils.Constants
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 
 class WeatherViewModel(
-    private val repository: WeatherRepository,
-    private val dataStore: DataStore<WeatherData?>
+    private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
+    private val selectWeatherDataUseCase: SelectWeatherDataUseCase
 ) : ViewModel() {
 
     private val _searchResults = MutableStateFlow<List<WeatherData>>(emptyList())
@@ -31,7 +30,7 @@ class WeatherViewModel(
 
     init {
         viewModelScope.launch {
-            _selectedWeatherData.value = dataStore.data.first()
+            _selectedWeatherData.value = selectWeatherDataUseCase.getSelectedWeatherData()
         }
     }
 
@@ -44,7 +43,7 @@ class WeatherViewModel(
                 _searchResults.value = emptyList()
                 return@launch
             } else {
-                val data = repository.getWeatherData(query)
+                val data = fetchWeatherDataUseCase(query)
                 _searchResults.value = data
             }
         }
@@ -52,7 +51,7 @@ class WeatherViewModel(
 
     fun selectWeatherData(data: WeatherData) {
         viewModelScope.launch {
-            dataStore.updateData { data }
+            selectWeatherDataUseCase(data)
             _selectedWeatherData.value = data
             _query.value = ""
         }

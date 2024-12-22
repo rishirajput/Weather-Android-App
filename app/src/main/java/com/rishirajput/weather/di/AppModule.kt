@@ -10,6 +10,8 @@ import com.rishirajput.weather.data.repository.RetrofitWeatherRepository
 import com.rishirajput.weather.data.serializer.WeatherDataSerializer
 import com.rishirajput.weather.domain.model.WeatherData
 import com.rishirajput.weather.domain.repository.WeatherRepository
+import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
+import com.rishirajput.weather.domain.usecase.SelectWeatherDataUseCase
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -20,11 +22,12 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-
 val appModule = module {
     single { provideRetrofit().create(WeatherApiService::class.java) }
     single<WeatherRepository> { RetrofitWeatherRepository(get()) }
     single<DataStore<WeatherData?>> { provideDataStore(get()) }
+    single { FetchWeatherDataUseCase(get()) }
+    single { SelectWeatherDataUseCase(get()) }
     viewModel { WeatherViewModel(get(), get()) }
 }
 
