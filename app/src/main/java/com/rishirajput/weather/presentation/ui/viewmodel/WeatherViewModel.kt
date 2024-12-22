@@ -61,9 +61,9 @@ class WeatherViewModel(
             _isLoading.value = true
             try {
                 val result = fetchWeatherDataUseCase(query)
-                if (result is com.rishirajput.domain.model.Result.Success) {
+                if (result is Result.Success) {
                     _searchResults.value = result.data
-                } else if (result is com.rishirajput.domain.model.Result.Error) {
+                } else if (result is Result.Error) {
                     _errorFlow.emit(result.exception.message ?: "Unknown error")
                 }
             } catch (e: Exception) {
