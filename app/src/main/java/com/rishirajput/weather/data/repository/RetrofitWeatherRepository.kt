@@ -1,13 +1,12 @@
 package com.rishirajput.weather.data.repository
 
 import android.util.Log
-import com.rishirajput.weather.data.api.WeatherApiService
-import com.rishirajput.weather.domain.model.WeatherData
-import com.rishirajput.weather.domain.repository.WeatherRepository
 import com.rishirajput.weather.BuildConfig
 import com.rishirajput.weather.data.api.LocationResponse
+import com.rishirajput.weather.data.api.WeatherApiService
 import com.rishirajput.weather.data.api.WeatherResponse
-import okhttp3.ResponseBody
+import com.rishirajput.weather.domain.model.WeatherData
+import com.rishirajput.weather.domain.repository.WeatherRepository
 import retrofit2.HttpException
 import retrofit2.Response
 
