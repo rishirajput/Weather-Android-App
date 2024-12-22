@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
 import highlightedBackGround
@@ -29,4 +30,22 @@ fun WeatherInfo(weatherData: WeatherData, modifier: Modifier = Modifier) {
         WeatherFieldInfo(label = "UV", value = "${weatherData.uvIndex}")
         WeatherFieldInfo(label = "Feels Like", value = "${weatherData.feelsLike}°")
     }
+}
+
+/**
+ * Preview function for WeatherInfo composable.
+ */
+@Preview(showBackground = true)
+@Composable
+fun PreviewWeatherInfo() {
+    val dummyWeatherData = WeatherData(
+        locationName = "Hyderabad",
+        temperature = 31.0,
+        condition = "Patchy rain nearby",
+        icon = "//cdn.weatherapi.com/weather/64x64/night/176.png",
+        humidity = 76,
+        uvIndex = 4.0,
+        feelsLike = 30.4
+    )
+    WeatherInfo(weatherData = dummyWeatherData)
 }
