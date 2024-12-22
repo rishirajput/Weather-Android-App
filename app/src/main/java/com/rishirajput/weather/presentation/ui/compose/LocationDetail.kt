@@ -12,16 +12,21 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
 
+/**
+ * Composable function to display the details of a location's weather.
+ *
+ * @param weatherData The weather data to display.
+ */
 @Composable
 fun LocationDetail(weatherData: WeatherData) {
-
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(56.dp)
     ) {
         WeatherStatusIcon(
-            iconUrl = weatherData.icon, modifier = Modifier.align(Alignment.CenterHorizontally)
+            iconUrl = weatherData.icon,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
         Spacer(modifier = Modifier.height(11.dp))
         LocationName(
@@ -34,11 +39,15 @@ fun LocationDetail(weatherData: WeatherData) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         WeatherInfo(
-            weatherData = weatherData, modifier = Modifier.align(Alignment.CenterHorizontally)
+            weatherData = weatherData,
+            modifier = Modifier.align(Alignment.CenterHorizontally)
         )
     }
 }
 
+/**
+ * Preview function for LocationDetail composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun PreviewLocationDetail() {
