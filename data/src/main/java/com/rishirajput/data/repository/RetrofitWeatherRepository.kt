@@ -36,7 +36,7 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
                     if (locationsResult.data.isEmpty()) {
                         return@withContext Result.Error(InvalidCityException())
                     }
-                    val weatherData = locationsResult.data.mapNotNull { location ->
+                    val weatherData = locationsResult.data.map { location ->
                         val weatherResult = getWeatherDataForLocation(location.name)
                         if (weatherResult is Result.Success) {
                             weatherResult.data
