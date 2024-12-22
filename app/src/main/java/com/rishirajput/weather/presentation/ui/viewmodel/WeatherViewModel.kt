@@ -2,7 +2,6 @@ package com.rishirajput.weather.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rishirajput.domain.model.Result
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
@@ -22,8 +21,8 @@ class WeatherViewModel(
     private val getCurrentWeatherDataUseCase: GetCurrentWeatherDataUseCase
 ) : ViewModel() {
 
-    private val _searchResults = MutableStateFlow<Result<List<WeatherData>>>(Result.Success(emptyList()))
-    val searchResults: StateFlow<Result<List<WeatherData>>> = _searchResults
+    private val _searchResults = MutableStateFlow<List<WeatherData>>(emptyList())
+    val searchResults: StateFlow<List<WeatherData>> = _searchResults
 
     private val _selectedWeatherData = MutableStateFlow<WeatherData?>(null)
     val selectedWeatherData: StateFlow<WeatherData?> = _selectedWeatherData
@@ -34,15 +33,18 @@ class WeatherViewModel(
     private val _errorFlow = MutableSharedFlow<String>()
     val errorFlow: SharedFlow<String> = _errorFlow
 
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading
+
     private var fetchJob: Job? = null
 
     init {
         viewModelScope.launch {
             _selectedWeatherData.value = getSelectedWeatherDataUseCase()
             when (val result = getCurrentWeatherDataUseCase(_selectedWeatherData.value)) {
-                is Result.Success -> _selectedWeatherData.value = result.data
-                is Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
-                Result.Loading -> { /* Handle loading state if needed */ }
+                is com.rishirajput.domain.model.Result.Success -> _selectedWeatherData.value = result.data
+                is com.rishirajput.domain.model.Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
+                com.rishirajput.domain.model.Result.Loading -> { /* Handle loading state if needed */ }
                 null -> { /* Handle null case if needed */ }
             }
         }
@@ -52,13 +54,18 @@ class WeatherViewModel(
         _query.value = query
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
-            _searchResults.value = Result.Loading
+            _isLoading.value = true
             try {
                 val result = fetchWeatherDataUseCase(query)
-                _searchResults.value = result
+                if (result is com.rishirajput.domain.model.Result.Success) {
+                    _searchResults.value = result.data
+                } else if (result is com.rishirajput.domain.model.Result.Error) {
+                    _errorFlow.emit(result.exception.message ?: "Unknown error")
+                }
             } catch (e: Exception) {
-                _searchResults.value = Result.Error(e)
                 _errorFlow.emit(e.message ?: "Unknown error")
+            } finally {
+                _isLoading.value = false
             }
         }
     }
