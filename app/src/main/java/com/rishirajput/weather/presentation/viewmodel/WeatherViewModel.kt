@@ -4,19 +4,21 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
-import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
+import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
+import com.rishirajput.weather.domain.usecase.GetCurrentWeatherDataUseCase
 import com.rishirajput.weather.presentation.utils.Constants
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
     private val storeWeatherDataUseCase: StoreWeatherDataUseCase,
-    private val getSelectedWeatherDataUseCase: GetSelectedWeatherDataUseCase
+    private val getSelectedWeatherDataUseCase: GetSelectedWeatherDataUseCase,
+    private val getCurrentWeatherDataUseCase: GetCurrentWeatherDataUseCase
 ) : ViewModel() {
 
     private val _searchResults = MutableStateFlow<List<WeatherData>>(emptyList())
@@ -33,6 +35,7 @@ class WeatherViewModel(
     init {
         viewModelScope.launch {
             _selectedWeatherData.value = getSelectedWeatherDataUseCase()
+            _selectedWeatherData.value = getCurrentWeatherDataUseCase(_selectedWeatherData.value)
         }
     }
 

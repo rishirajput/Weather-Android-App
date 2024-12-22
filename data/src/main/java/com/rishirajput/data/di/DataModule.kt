@@ -16,6 +16,7 @@ import com.rishirajput.domain.repository.WeatherRepository
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
+import com.rishirajput.weather.domain.usecase.GetCurrentWeatherDataUseCase
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -33,6 +34,7 @@ val dataModule = module {
     single { FetchWeatherDataUseCase(get()) }
     single { StoreWeatherDataUseCase(get()) }
     single { GetSelectedWeatherDataUseCase(get()) }
+    single { GetCurrentWeatherDataUseCase(get()) }
 }
 
 @OptIn(ExperimentalSerializationApi::class)
