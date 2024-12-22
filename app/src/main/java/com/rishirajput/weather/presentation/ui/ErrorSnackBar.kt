@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
-fun ErrorSnackbar(snackBarHostState: SnackbarHostState, errorFlow: Flow<String>) {
+fun ErrorSnackBar(snackBarHostState: SnackbarHostState, errorFlow: Flow<String>) {
     LaunchedEffect(Unit) {
         errorFlow.collectLatest { errorMessage ->
             snackBarHostState.showSnackbar(errorMessage)

@@ -19,7 +19,7 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.ui.ErrorSnackbar
+import com.rishirajput.weather.presentation.ui.ErrorSnackBar
 import com.rishirajput.weather.presentation.ui.theme.appBackgroundColor
 import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
@@ -62,7 +62,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
                 NoCitySelected()
             }
         }
-        ErrorSnackbar(snackBarHostState = snackBarHostState, errorFlow = viewModel.errorFlow)
+        ErrorSnackBar(snackBarHostState = snackBarHostState, errorFlow = viewModel.errorFlow)
     }
 }
 
