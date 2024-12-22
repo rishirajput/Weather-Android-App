@@ -9,6 +9,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.rishirajput.weather.R
 
+// Define the Poppins font family
 val poppinsFontFamily = FontFamily(
     Font(R.font.poppins_thin, FontWeight.Thin),
     Font(R.font.poppins_extra_light, FontWeight.ExtraLight),
@@ -30,6 +31,7 @@ val poppinsFontFamily = FontFamily(
     Font(R.font.poppins_black_italic, FontWeight.Black)
 )
 
+// Define the typography for the app
 val AppTypography = Typography(
     bodyLarge = TextStyle(
         fontFamily = poppinsFontFamily,
@@ -45,6 +47,7 @@ val AppTypography = Typography(
     ),
 )
 
+// City name text style
 val textStyleCityName = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 30.sp,
@@ -54,6 +57,7 @@ val textStyleCityName = TextStyle(
     color = appFontColor
 )
 
+// Search city label text style
 val textStyleSearchCityLabel = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 15.sp,
@@ -63,6 +67,7 @@ val textStyleSearchCityLabel = TextStyle(
     color = appFontColor
 )
 
+// Location name text style
 val textStyleLocationName = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 20.sp,
@@ -71,6 +76,7 @@ val textStyleLocationName = TextStyle(
     textAlign = TextAlign.Center
 )
 
+// Current temperature text style
 val textStyleCurrentTemperature = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 60.sp,
@@ -79,6 +85,7 @@ val textStyleCurrentTemperature = TextStyle(
     textAlign = TextAlign.Left,
 )
 
+// Large temperature text style
 val textStyleTemperatureLarge = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 70.sp,
@@ -87,6 +94,7 @@ val textStyleTemperatureLarge = TextStyle(
     textAlign = TextAlign.Center,
 )
 
+// Medium text style
 val textStyleMedium = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 15.sp,
@@ -96,6 +104,7 @@ val textStyleMedium = TextStyle(
     color = appFontColorHeavy
 )
 
+// Small text style
 val textStyleSmall = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 12.sp,
