@@ -17,10 +17,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.rishirajput.domain.model.WeatherData
+import com.rishirajput.weather.presentation.ui.highLightedBackGround
 import com.rishirajput.weather.presentation.ui.theme.textStyleCurrentTemperature
 import com.rishirajput.weather.presentation.ui.theme.textStyleLocationName
 import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
-import highlightedBackGround
 
 /**
  * Composable function to display a card with weather information for a location.
@@ -33,7 +33,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .highlightedBackGround()
+            .highLightedBackGround()
             .clickable(onClick = onClick)
             .padding(start = 30.dp, top = 16.dp, end = 16.dp),
         verticalAlignment = Alignment.CenterVertically,

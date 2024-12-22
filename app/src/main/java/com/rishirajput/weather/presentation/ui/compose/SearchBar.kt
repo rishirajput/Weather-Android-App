@@ -16,7 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import highlightedBackGround
+import com.rishirajput.weather.presentation.ui.highLightedBackGround
 
 /**
  * Composable function to display a search bar.
@@ -37,7 +37,7 @@ fun SearchBar(
         modifier = modifier
             .fillMaxWidth()
             .height(46.dp)
-            .highlightedBackGround()
+            .highLightedBackGround()
             .padding(horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {

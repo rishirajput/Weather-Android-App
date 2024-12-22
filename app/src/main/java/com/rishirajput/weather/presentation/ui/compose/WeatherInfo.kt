@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
-import highlightedBackGround
+import com.rishirajput.weather.presentation.ui.highLightedBackGround
 
 /**
  * Composable function to display weather information.
@@ -22,7 +22,7 @@ fun WeatherInfo(weatherData: WeatherData, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .highlightedBackGround()
+            .highLightedBackGround()
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
