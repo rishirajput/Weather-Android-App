@@ -1,6 +1,7 @@
 package com.rishirajput.data.api
 
 import com.rishirajput.domain.model.Location
+import com.rishirajput.domain.model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -3,7 +3,6 @@ package com.rishirajput.data.repository
 import android.util.Log
 import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
-import com.rishirajput.data.api.WeatherResponse
 import com.rishirajput.data.utils.Constants
 import com.rishirajput.domain.errors.InvalidCityException
 import com.rishirajput.domain.errors.NoNetworkException
@@ -16,6 +15,7 @@ import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Response
 import com.rishirajput.domain.model.Result
+import com.rishirajput.domain.model.WeatherResponse
 import java.io.IOException
 
 class RetrofitWeatherRepository(private val apiService: WeatherApiService) : WeatherRepository {

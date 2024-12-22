@@ -1,11 +1,6 @@
-package com.rishirajput.data.api
+package com.rishirajput.domain.model
 
 import kotlinx.serialization.Serializable
-
-@Serializable
-data class WeatherResponse(
-    val current: CurrentWeather
-)
 
 @Serializable
 data class CurrentWeather(
@@ -14,10 +9,4 @@ data class CurrentWeather(
     val humidity: Int,
     val uv: Double,
     val feelslike_c: Double
-)
-
-@Serializable
-data class Condition(
-    val text: String,
-    val icon: String
 )
