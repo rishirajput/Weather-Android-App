@@ -1,10 +1,11 @@
-package com.rishirajput.weather.presentation.ui.theme
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.rishirajput.weather.presentation.ui.theme.highLightColor
 
 /**
  * Extension function to apply a highlighted background with a rounded corner shape.
