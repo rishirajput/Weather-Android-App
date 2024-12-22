@@ -59,7 +59,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
                     })
                 }
             }
-        } else {
+        } else if(query.isEmpty()) {
             NoCitySelected()
         }
     }
