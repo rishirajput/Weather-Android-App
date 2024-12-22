@@ -6,6 +6,6 @@ import com.rishirajput.domain.model.Result
 
 interface WeatherRepository {
     suspend fun getWeatherData(query: String): Result<List<WeatherData>>
-    suspend fun getLocations(query: String): List<Location>
-    suspend fun getWeatherDataForLocation(locationName: String): WeatherData
+    suspend fun getLocations(query: String): Result<List<Location>>
+    suspend fun getWeatherDataForLocation(locationName: String): Result<WeatherData>
 }

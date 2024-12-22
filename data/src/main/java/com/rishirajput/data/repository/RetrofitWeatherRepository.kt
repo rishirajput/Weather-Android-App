@@ -26,47 +26,62 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
 
         return withContext(Dispatchers.IO) {
             try {
-                val locations = getLocations(query)
-                val weatherData = locations.map { getWeatherDataForLocation(it.name) }
-                Result.Success(weatherData)
+                val locationsResult = getLocations(query)
+                if (locationsResult is Result.Success) {
+                    val weatherData = locationsResult.data.map { location ->
+                        val weatherResult = getWeatherDataForLocation(location.name)
+                        if (weatherResult is Result.Success) {
+                            weatherResult.data
+                        } else {
+                            throw (weatherResult as Result.Error).exception
+                        }
+                    }
+                    Result.Success(weatherData)
+                } else {
+                    throw (locationsResult as Result.Error).exception
+                }
             } catch (e: Exception) {
                 Result.Error(e)
             }
         }
     }
 
-    override suspend fun getLocations(query: String): List<Location> {
-        val location: Response<List<Location>> = apiService.searchLocation(BuildConfig.WEATHER_API_KEY, query)
-        if (!location.isSuccessful || location.body().isNullOrEmpty()) {
-            Log.e("RetrofitWeatherRepository", "No matching location found for query: $query")
-            return emptyList()
+    override suspend fun getLocations(query: String): Result<List<Location>> {
+        return try {
+            val location: Response<List<Location>> = apiService.searchLocation(BuildConfig.WEATHER_API_KEY, query)
+            if (!location.isSuccessful || location.body().isNullOrEmpty()) {
+                Log.e("RetrofitWeatherRepository", "No matching location found for query: $query")
+                Result.Success(emptyList())
+            } else {
+                Result.Success(location.body()!!)
+            }
+        } catch (e: Exception) {
+            Result.Error(e)
         }
-        return location.body()!!
     }
 
-    override suspend fun getWeatherDataForLocation(locationName: String): WeatherData {
-        var weatherData = WeatherData("", 0.0, "", "", 0, 0.0, 0.0)
-        try {
+    override suspend fun getWeatherDataForLocation(locationName: String): Result<WeatherData> {
+        return try {
             val weatherResponse: Response<WeatherResponse> = apiService.getCurrentWeather(BuildConfig.WEATHER_API_KEY, locationName)
             if (weatherResponse.isSuccessful) {
                 val current = weatherResponse.body()?.current
-                weatherData = weatherData.copy(
-                        locationName = locationName,
-                        temperature = current?.temp_c ?: 0.0,
-                        condition = current?.condition?.text ?: "Unknown",
-                        icon = current?.condition?.icon ?: "",
-                        humidity = current?.humidity ?: 0,
-                        uvIndex = current?.uv ?: 0.0,
-                        feelsLike = current?.feelslike_c ?: 0.0
+                val weatherData = WeatherData(
+                    locationName = locationName,
+                    temperature = current?.temp_c ?: 0.0,
+                    condition = current?.condition?.text ?: "Unknown",
+                    icon = current?.condition?.icon ?: "",
+                    humidity = current?.humidity ?: 0,
+                    uvIndex = current?.uv ?: 0.0,
+                    feelsLike = current?.feelslike_c ?: 0.0
                 )
+                Result.Success(weatherData)
             } else {
                 Log.e("RetrofitWeatherRepository", "HTTP error: ${weatherResponse.code()} ${weatherResponse.message()}")
+                Result.Error(HttpException(weatherResponse))
             }
-        } catch (e: HttpException) {
-            Log.e("RetrofitWeatherRepository", "HTTP error: ${e.code()} ${e.message()}")
         } catch (e: Exception) {
             Log.e("RetrofitWeatherRepository", "Error fetching weather data", e)
+            Result.Error(e)
         }
-        return weatherData
     }
 }

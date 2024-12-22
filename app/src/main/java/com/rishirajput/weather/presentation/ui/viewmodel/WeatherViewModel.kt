@@ -7,11 +7,13 @@ import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
-import com.rishirajput.weather.domain.usecase.GetCurrentWeatherDataUseCase
+import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
 
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
@@ -29,12 +31,20 @@ class WeatherViewModel(
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
 
+    private val _errorFlow = MutableSharedFlow<String>()
+    val errorFlow: SharedFlow<String> = _errorFlow
+
     private var fetchJob: Job? = null
 
     init {
         viewModelScope.launch {
             _selectedWeatherData.value = getSelectedWeatherDataUseCase()
-            _selectedWeatherData.value = getCurrentWeatherDataUseCase(_selectedWeatherData.value)
+            when (val result = getCurrentWeatherDataUseCase(_selectedWeatherData.value)) {
+                is Result.Success -> _selectedWeatherData.value = result.data
+                is Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
+                Result.Loading -> { /* Handle loading state if needed */ }
+                null -> { /* Handle null case if needed */ }
+            }
         }
     }
 
@@ -48,6 +58,7 @@ class WeatherViewModel(
                 _searchResults.value = result
             } catch (e: Exception) {
                 _searchResults.value = Result.Error(e)
+                _errorFlow.emit(e.message ?: "Unknown error")
             }
         }
     }

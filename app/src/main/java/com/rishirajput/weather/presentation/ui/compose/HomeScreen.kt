@@ -1,13 +1,7 @@
 package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
@@ -26,6 +20,11 @@ import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
 import com.rishirajput.domain.model.Result
 import com.rishirajput.domain.model.WeatherData
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.runtime.remember
+import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
@@ -34,6 +33,14 @@ fun HomeScreen(innerPadding: PaddingValues) {
     val searchResults by viewModel.searchResults.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
     val focusManager = LocalFocusManager.current
+    val snackBarHostState = remember { SnackbarHostState() }
+
+
+    LaunchedEffect(Unit) {
+        viewModel.errorFlow.collectLatest { errorMessage ->
+            snackBarHostState.showSnackbar(errorMessage)
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -81,5 +88,6 @@ fun HomeScreen(innerPadding: PaddingValues) {
                 )
             }
         }
+        SnackbarHost(hostState = snackBarHostState)
     }
 }
