@@ -48,7 +48,7 @@ fun SearchBar(
                     contentAlignment = Alignment.CenterStart
                 ) {
                     if (query.isEmpty()) {
-                        PlaceHolderText(text = placeholderText)
+                        PlaceHolderText(placeholderText = placeholderText)
                     }
                     innerTextField()
                 }
