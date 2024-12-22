@@ -1,4 +1,4 @@
-package com.rishirajput.weather.domain.usecase
+package com.rishirajput.domain.usecase
 
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.LocalStorageRepository

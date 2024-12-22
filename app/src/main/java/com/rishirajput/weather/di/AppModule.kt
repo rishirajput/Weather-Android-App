@@ -11,9 +11,10 @@ import com.rishirajput.weather.data.serializer.WeatherDataSerializer
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.LocalStorageRepository
 import com.rishirajput.domain.repository.WeatherRepository
+import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.weather.data.repository.DataStoreRepository
-import com.rishirajput.weather.domain.usecase.FetchWeatherDataUseCase
-import com.rishirajput.weather.domain.usecase.StoreWeatherDataUseCase
+import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
+import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -31,7 +32,8 @@ val appModule = module {
     single<LocalStorageRepository> { DataStoreRepository(get()) }
     single { FetchWeatherDataUseCase(get()) }
     single { StoreWeatherDataUseCase(get()) }
-    viewModel { WeatherViewModel(get(), get()) }
+    single { GetSelectedWeatherDataUseCase(get()) }
+    viewModel { WeatherViewModel(get(), get(), get()) }
 }
 
 @OptIn(ExperimentalSerializationApi::class)
