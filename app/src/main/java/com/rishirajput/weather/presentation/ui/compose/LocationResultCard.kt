@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.presentation.ui.theme.textStyleCurrentTemperature
-import com.rishirajput.weather.presentation.ui.theme.textStyleLoationName
+import com.rishirajput.weather.presentation.ui.theme.textStyleLocationName
 import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
 import highlightedBackGround
 
@@ -42,7 +42,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
         Column {
             Text(
                 text = weatherData.locationName,
-                style = textStyleLoationName
+                style = textStyleLocationName
             )
             CurrentTemperature(
                 temperature = weatherData.temperature,
