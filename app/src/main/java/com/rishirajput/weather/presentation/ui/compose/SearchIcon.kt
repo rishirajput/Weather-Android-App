@@ -10,16 +10,22 @@ import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.onSurfaceColor
 
+/**
+ * Composable function to display a search icon.
+ */
 @Composable
-fun SearchIcon() {
+fun SearchIcon(modifier: Modifier = Modifier) {
     Icon(
         painter = painterResource(id = R.drawable.icon_action_search),
         contentDescription = "Search Icon",
         tint = onSurfaceColor,
-        modifier = Modifier.size(17.49.dp)
+        modifier = modifier.size(17.49.dp)
     )
 }
 
+/**
+ * Preview function for SearchIcon composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun SearchIconPreview() {
