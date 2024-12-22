@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
-import com.rishirajput.weather.presentation.ui.ErrorSnackBar
 import com.rishirajput.weather.presentation.ui.theme.appBackgroundColor
 import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
