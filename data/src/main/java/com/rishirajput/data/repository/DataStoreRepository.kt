@@ -5,6 +5,9 @@ import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.LocalStorageRepository
 import kotlinx.coroutines.flow.first
 
+/**
+ * Repository for managing weather data storage using DataStore.
+ */
 class DataStoreRepository(
     private val dataStore: DataStore<WeatherData?>
 ) : LocalStorageRepository {
