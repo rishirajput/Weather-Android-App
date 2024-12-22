@@ -1,4 +1,4 @@
-package com.rishirajput.weather.data.repository
+package com.rishirajput.data.repository
 
 import androidx.datastore.core.DataStore
 import com.rishirajput.domain.model.WeatherData

@@ -1,4 +1,4 @@
-package com.rishirajput.weather.data.serializer
+package com.rishirajput.data.Serializer
 
 import androidx.datastore.core.CorruptionException
 import androidx.datastore.core.Serializer

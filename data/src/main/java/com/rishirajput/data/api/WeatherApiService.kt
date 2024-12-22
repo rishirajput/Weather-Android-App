@@ -1,4 +1,4 @@
-package com.rishirajput.weather.data.api
+package com.rishirajput.data.api
 
 import com.rishirajput.domain.model.Location
 import retrofit2.Response

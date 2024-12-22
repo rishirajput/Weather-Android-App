@@ -1,10 +1,10 @@
-package com.rishirajput.weather.data.repository
+package com.rishirajput.data.repository
 
 import android.util.Log
-import com.rishirajput.weather.BuildConfig
+import com.rishirajput.data.BuildConfig
+import com.rishirajput.data.api.WeatherApiService
+import com.rishirajput.data.api.WeatherResponse
 import com.rishirajput.domain.model.Location
-import com.rishirajput.weather.data.api.WeatherApiService
-import com.rishirajput.weather.data.api.WeatherResponse
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.WeatherRepository
 import retrofit2.HttpException
