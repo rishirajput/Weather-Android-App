@@ -41,13 +41,12 @@ fun HomeScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 20.dp, end = 20.dp)
     ) {
         Spacer(modifier = Modifier.height(44.dp))
         SearchBar(
             query = searchQuery,
             placeholderText = stringResource(id = R.string.search_location),
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(24.dp),
             onSearch = onSearch
         )
         Spacer(modifier = Modifier.height(32.dp))

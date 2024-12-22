@@ -10,12 +10,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.textStyleCityName
 
+/**
+ * Composable function to display the location name with an icon.
+ *
+ * @param locationName The name of the location to display.
+ * @param modifier The modifier to be applied to the composable.
+ */
 @Composable
-fun LocationName(locationName: String, modifier: Modifier) {
+fun LocationName(locationName: String, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
     ) {
@@ -33,4 +40,13 @@ fun LocationName(locationName: String, modifier: Modifier) {
                 .align(Alignment.CenterVertically)
         )
     }
+}
+
+/**
+ * Preview function for LocationName composable.
+ */
+@Preview(showBackground = true)
+@Composable
+fun PreviewLocationName() {
+    LocationName(locationName = "Hyderabad")
 }
