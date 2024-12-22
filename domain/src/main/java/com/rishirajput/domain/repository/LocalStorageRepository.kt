@@ -4,4 +4,5 @@ import com.rishirajput.domain.model.WeatherData
 
 interface LocalStorageRepository {
     suspend fun storeWeatherData(weatherData: WeatherData)
+    suspend fun getWeatherData(): WeatherData
 }
