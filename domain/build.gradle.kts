@@ -15,8 +15,15 @@ kotlin {
     }
 }
 
+sourceSets {
+    test {
+        java.srcDir("src/test/java")
+    }
+}
+
 dependencies {
     implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
