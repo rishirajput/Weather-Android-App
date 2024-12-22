@@ -10,7 +10,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.R
@@ -71,4 +73,27 @@ fun HomeScreenContent(
             }
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHomeScreenContent() {
+    val dummyWeatherData = WeatherData(
+        locationName = "Hyderabad",
+        temperature = 31.0,
+        condition = "Patchy rain nearby",
+        icon = "//cdn.weatherapi.com/weather/64x64/night/176.png",
+        humidity = 76,
+        uvIndex = 4.0,
+        feelsLike = 30.4
+    )
+    HomeScreenContent(
+        searchQuery = "",
+        searchResults = listOf(dummyWeatherData),
+        storedWeatherData = dummyWeatherData,
+        isLoading = false,
+        onSearch = {},
+        onLocationClick = {},
+        focusManager = LocalFocusManager.current
+    )
 }
