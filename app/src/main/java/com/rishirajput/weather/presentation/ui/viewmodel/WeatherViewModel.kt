@@ -25,8 +25,8 @@ class WeatherViewModel(
     private val _searchResults = MutableStateFlow<List<WeatherData>>(emptyList())
     val searchResults: StateFlow<List<WeatherData>> = _searchResults
 
-    private val _selectedWeatherData = MutableStateFlow<WeatherData?>(null)
-    val selectedWeatherData: StateFlow<WeatherData?> = _selectedWeatherData
+    private val _storedWeatherData = MutableStateFlow<WeatherData?>(null)
+    val storedWeatherData: StateFlow<WeatherData?> = _storedWeatherData
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: StateFlow<String> = _searchQuery
@@ -41,9 +41,9 @@ class WeatherViewModel(
 
     init {
         viewModelScope.launch {
-            _selectedWeatherData.value = getSelectedWeatherDataUseCase()
-            when (val result = getCurrentWeatherDataUseCase(_selectedWeatherData.value)) {
-                is Result.Success -> _selectedWeatherData.value = result.data
+            _storedWeatherData.value = getSelectedWeatherDataUseCase()
+            when (val result = getCurrentWeatherDataUseCase(_storedWeatherData.value)) {
+                is Result.Success -> _storedWeatherData.value = result.data
                 is Result.Error -> _errorFlow.emit(result.exception)
                 Result.Loading -> { /* Handle loading state if needed */
                 }
@@ -80,7 +80,7 @@ class WeatherViewModel(
     fun selectWeatherData(data: WeatherData) {
         viewModelScope.launch {
             storeWeatherDataUseCase(data)
-            _selectedWeatherData.value = data
+            _storedWeatherData.value = data
             _searchQuery.value = ""
         }
     }

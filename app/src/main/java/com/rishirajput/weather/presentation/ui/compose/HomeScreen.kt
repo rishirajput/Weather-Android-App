@@ -17,9 +17,11 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.ErrorSnackBar
 import com.rishirajput.weather.presentation.ui.theme.appBackgroundColor
@@ -31,7 +33,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
     val viewModel: WeatherViewModel = getViewModel()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchResults by viewModel.searchResults.collectAsState()
-    val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
+    val storedWeatherData by viewModel.storedWeatherData.collectAsState()
     val isLoading by viewModel.isLoading.collectAsState()
     val focusManager = LocalFocusManager.current
     val snackBarHostState = remember { SnackbarHostState() }
@@ -42,37 +44,65 @@ fun HomeScreen(innerPadding: PaddingValues) {
             .background(appBackgroundColor)
             .padding(innerPadding)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 20.dp, end = 20.dp)
-        ) {
-            Spacer(modifier = Modifier.height(44.dp))
-            SearchBar(searchQuery,
-                placeholderText = stringResource(id = R.string.search_location),
-                modifier = Modifier.padding(4.dp),
-                onSearch = { viewModel.fetchWeatherData(it) })
-            Spacer(modifier = Modifier.height(32.dp))
-            if (isLoading) {
-                CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
-            } else {
-                if (selectedWeatherData != null && searchQuery.isEmpty()) {
-                    LocationDetail(weatherData = selectedWeatherData!!)
-                } else if (searchResults.isNotEmpty()) {
+        HomeScreenContent(
+            searchQuery = searchQuery,
+            searchResults = searchResults,
+            storedWeatherData = storedWeatherData,
+            isLoading = isLoading,
+            onSearch = { viewModel.fetchWeatherData(it) },
+            onLocationClick = { data -> viewModel.selectWeatherData(data) },
+            focusManager = focusManager
+        )
+        SnackbarHost(
+            hostState = snackBarHostState, modifier = Modifier.align(Alignment.BottomCenter)
+        )
+        ErrorSnackBar(snackBarHostState = snackBarHostState, errorFlow = viewModel.errorFlow)
+    }
+}
+
+@Composable
+fun HomeScreenContent(
+    searchQuery: String,
+    searchResults: List<WeatherData>,
+    storedWeatherData: WeatherData?,
+    isLoading: Boolean,
+    onSearch: (String) -> Unit,
+    onLocationClick: (WeatherData) -> Unit,
+    focusManager: FocusManager
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(start = 20.dp, end = 20.dp)
+    ) {
+        Spacer(modifier = Modifier.height(44.dp))
+        SearchBar(
+            query = searchQuery,
+            placeholderText = stringResource(id = R.string.search_location),
+            modifier = Modifier.padding(4.dp),
+            onSearch = onSearch
+        )
+        Spacer(modifier = Modifier.height(32.dp))
+        if (isLoading) {
+            CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
+        } else {
+            when {
+                storedWeatherData != null && searchQuery.isEmpty() -> {
+                    LocationDetail(weatherData = storedWeatherData)
+                }
+
+                searchResults.isNotEmpty() -> {
                     LocationResults(
                         searchResults = searchResults,
-                        onLocationClick = { data -> viewModel.selectWeatherData(data) },
+                        onLocationClick = onLocationClick,
                         focusManager = focusManager
                     )
-                } else if (searchQuery.isEmpty()) {
+                }
+
+                searchQuery.isEmpty() -> {
                     NoCitySelected()
                 }
             }
         }
-        ErrorSnackBar(snackBarHostState = snackBarHostState, errorFlow = viewModel.errorFlow)
-        SnackbarHost(
-            hostState = snackBarHostState,
-            modifier = Modifier.align(Alignment.BottomCenter)
-        )
     }
 }

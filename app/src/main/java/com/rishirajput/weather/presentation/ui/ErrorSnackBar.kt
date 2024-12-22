@@ -1,5 +1,6 @@
 package com.rishirajput.weather.presentation.ui
 
+import android.util.Log
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -17,11 +18,11 @@ fun ErrorSnackBar(snackBarHostState: SnackbarHostState, errorFlow: Flow<Throwabl
     LaunchedEffect(Unit) {
         errorFlow.collectLatest { error ->
             val errorMessage = when (error) {
-                is NullPointerException -> context.getString(R.string.not_found_error)
                 is NoNetworkException -> context.getString(R.string.network_error)
                 is InvalidCityException -> context.getString(R.string.invalid_city_name)
-                else -> error.localizedMessage ?: "An unexpected error occurred"
+                else -> "".also { Log.e("Exception", "Error: $error") }
             }
+            if (errorMessage.isNotEmpty())
             snackBarHostState.showSnackbar(errorMessage)
         }
     }
