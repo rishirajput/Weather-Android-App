@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
+import com.rishirajput.domain.model.Result
 
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
@@ -42,10 +43,13 @@ class WeatherViewModel(
         viewModelScope.launch {
             _selectedWeatherData.value = getSelectedWeatherDataUseCase()
             when (val result = getCurrentWeatherDataUseCase(_selectedWeatherData.value)) {
-                is com.rishirajput.domain.model.Result.Success -> _selectedWeatherData.value = result.data
-                is com.rishirajput.domain.model.Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
-                com.rishirajput.domain.model.Result.Loading -> { /* Handle loading state if needed */ }
-                null -> { /* Handle null case if needed */ }
+                is Result.Success -> _selectedWeatherData.value = result.data
+                is Result.Error -> _errorFlow.emit(result.exception.message ?: "Unknown error")
+                Result.Loading -> { /* Handle loading state if needed */
+                }
+
+                null -> {
+                }
             }
         }
     }
