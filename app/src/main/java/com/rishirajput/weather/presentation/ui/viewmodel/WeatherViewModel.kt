@@ -45,9 +45,6 @@ class WeatherViewModel(
             when (val result = getCurrentWeatherDataUseCase(_storedWeatherData.value)) {
                 is Result.Success -> _storedWeatherData.value = result.data
                 is Result.Error -> _errorFlow.emit(result.exception)
-                Result.Loading -> { /* Handle loading state if needed */
-                }
-
                 null -> {
                     _errorFlow.emit(NullPointerException())
                 }

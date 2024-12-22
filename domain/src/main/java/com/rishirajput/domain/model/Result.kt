@@ -17,9 +17,4 @@ sealed class Result<out T> {
      * @param exception The exception of the error result.
      */
     data class Error(val exception: Throwable) : Result<Nothing>()
-
-    /**
-     * Represents a loading state.
-     */
-    data object Loading : Result<Nothing>()
 }
