@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.utils
+package com.rishirajput.weather.presentation.ui.utils
 
 fun updateImageSizeInUrl(url: String, newSize: Int): String {
     val regex = Regex("""/(\d+)x(\d+)/""")

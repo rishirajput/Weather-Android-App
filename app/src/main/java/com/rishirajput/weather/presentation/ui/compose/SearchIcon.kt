@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -8,7 +8,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.theme.onSurfaceColor
+import com.rishirajput.weather.presentation.ui.theme.onSurfaceColor
 
 @Composable
 fun SearchIcon() {

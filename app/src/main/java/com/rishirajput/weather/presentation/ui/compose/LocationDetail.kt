@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

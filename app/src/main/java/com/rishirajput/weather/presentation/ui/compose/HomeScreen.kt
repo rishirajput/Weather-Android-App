@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,8 +18,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.theme.appBackgroundColor
-import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
+import com.rishirajput.weather.presentation.ui.theme.appBackgroundColor
+import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
 
 @Composable

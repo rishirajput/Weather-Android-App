@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
-import com.rishirajput.weather.presentation.utils.updateImageSizeInUrl
+import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
 
 @Composable
 fun WeatherStatusIcon(iconUrl: String, modifier: Modifier) {

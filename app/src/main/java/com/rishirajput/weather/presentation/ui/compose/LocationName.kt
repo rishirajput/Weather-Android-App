@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
@@ -12,7 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.theme.textStyleCityName
+import com.rishirajput.weather.presentation.ui.theme.textStyleCityName
 
 @Composable
 fun LocationName(locationName: String, modifier: Modifier) {

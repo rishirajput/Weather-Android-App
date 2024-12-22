@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.theme
+package com.rishirajput.weather.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

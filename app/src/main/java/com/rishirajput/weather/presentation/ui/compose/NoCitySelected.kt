@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,8 +15,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
-import com.rishirajput.weather.presentation.theme.textStyleCityName
-import com.rishirajput.weather.presentation.theme.textStyleSearchCityLabel
+import com.rishirajput.weather.presentation.ui.theme.textStyleCityName
+import com.rishirajput.weather.presentation.ui.theme.textStyleSearchCityLabel
 
 @Composable
 fun NoCitySelected() {

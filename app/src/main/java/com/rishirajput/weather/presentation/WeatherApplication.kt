@@ -1,8 +1,8 @@
-package com.rishirajput.weather.app
+package com.rishirajput.weather.presentation
 
 import android.app.Application
 import com.rishirajput.data.di.dataModule
-import com.rishirajput.weather.di.appModule
+import com.rishirajput.weather.presentation.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

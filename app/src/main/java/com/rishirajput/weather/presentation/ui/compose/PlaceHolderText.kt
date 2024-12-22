@@ -1,10 +1,10 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.rishirajput.weather.presentation.theme.onSurfaceColor
+import com.rishirajput.weather.presentation.ui.theme.onSurfaceColor
 
 @Composable
 fun PlaceHolderText(text: String) {

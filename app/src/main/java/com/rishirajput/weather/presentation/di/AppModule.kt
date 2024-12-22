@@ -1,6 +1,6 @@
-package com.rishirajput.weather.di
+package com.rishirajput.weather.presentation.di
 
-import com.rishirajput.weather.presentation.viewmodel.WeatherViewModel
+import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

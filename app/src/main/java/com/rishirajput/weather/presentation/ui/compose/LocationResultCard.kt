@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.ui
+package com.rishirajput.weather.presentation.ui.compose
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -16,11 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.rishirajput.domain.model.WeatherData
-import com.rishirajput.weather.presentation.theme.textStyleCurrentTemperature
-import com.rishirajput.weather.presentation.theme.textStyleLoationName
+import com.rishirajput.weather.presentation.ui.theme.textStyleCurrentTemperature
+import com.rishirajput.weather.presentation.ui.theme.textStyleLoationName
 import highlightedBackGround
 import androidx.compose.ui.Alignment
-import com.rishirajput.weather.presentation.utils.updateImageSizeInUrl
+import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
 
 @Composable
 fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {

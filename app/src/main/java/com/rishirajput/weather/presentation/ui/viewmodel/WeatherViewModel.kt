@@ -1,4 +1,4 @@
-package com.rishirajput.weather.presentation.viewmodel
+package com.rishirajput.weather.presentation.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,7 +7,7 @@ import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import com.rishirajput.weather.domain.usecase.GetCurrentWeatherDataUseCase
-import com.rishirajput.weather.presentation.utils.Constants
+import com.rishirajput.weather.presentation.ui.utils.Constants
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
