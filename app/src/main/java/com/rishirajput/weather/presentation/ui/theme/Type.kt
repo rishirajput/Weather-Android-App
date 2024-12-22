@@ -63,7 +63,7 @@ val textStyleSearchCityLabel = TextStyle(
     color = appFontColor
 )
 
-val textStyleLoationName = TextStyle(
+val textStyleLocationName = TextStyle(
     fontFamily = poppinsFontFamily,
     fontSize = 20.sp,
     fontWeight = FontWeight.W600,
@@ -93,7 +93,7 @@ val textStyleMedium = TextStyle(
     fontWeight = FontWeight.W500,
     lineHeight = 22.5.sp,
     textAlign = TextAlign.Center,
-    color = onSurfaceColor
+    color = appFontColorHeavy
 )
 
 val textStyleSmall = TextStyle(
