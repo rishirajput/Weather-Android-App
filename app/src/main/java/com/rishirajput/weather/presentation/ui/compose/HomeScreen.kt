@@ -33,7 +33,6 @@ fun HomeScreen(innerPadding: PaddingValues) {
     val query by viewModel.query.collectAsState()
     val searchResults by viewModel.searchResults.collectAsState()
     val selectedWeatherData by viewModel.selectedWeatherData.collectAsState()
-    val isLoading by viewModel.isLoading.collectAsState()
     val focusManager = LocalFocusManager.current
 
     Column(
@@ -44,17 +43,16 @@ fun HomeScreen(innerPadding: PaddingValues) {
             .padding(start = 20.dp, end = 20.dp)
     ) {
         Spacer(modifier = Modifier.height(44.dp))
-        SearchBar(
-            query,
+        SearchBar(query,
             placeholderText = stringResource(id = R.string.search_location),
             modifier = Modifier.padding(4.dp),
-            onSearch = { viewModel.fetchWeatherData(it) }
-        )
+            onSearch = { viewModel.fetchWeatherData(it) })
         Spacer(modifier = Modifier.height(32.dp))
         when (searchResults) {
             is Result.Loading -> {
                 CircularProgressIndicator(modifier = Modifier.align(Alignment.CenterHorizontally))
             }
+
             is Result.Success -> {
                 val weatherData = (searchResults as Result.Success<List<WeatherData>>).data
                 if (selectedWeatherData != null && query.isEmpty()) {
@@ -75,6 +73,7 @@ fun HomeScreen(innerPadding: PaddingValues) {
                     NoCitySelected()
                 }
             }
+
             is Result.Error -> {
                 Text(
                     text = stringResource(id = R.string.error_message),

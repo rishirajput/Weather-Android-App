@@ -29,9 +29,6 @@ class WeatherViewModel(
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
 
-    private val _isLoading = MutableStateFlow(false)
-    val isLoading: StateFlow<Boolean> = _isLoading
-
     private var fetchJob: Job? = null
 
     init {
@@ -45,15 +42,12 @@ class WeatherViewModel(
         _query.value = query
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
-            _isLoading.value = true
             _searchResults.value = Result.Loading
             try {
                 val result = fetchWeatherDataUseCase(query)
                 _searchResults.value = result
             } catch (e: Exception) {
                 _searchResults.value = Result.Error(e)
-            } finally {
-                _isLoading.value = false
             }
         }
     }
