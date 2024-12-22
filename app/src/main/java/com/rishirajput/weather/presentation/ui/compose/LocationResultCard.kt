@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -18,10 +19,15 @@ import coil.compose.rememberAsyncImagePainter
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.weather.presentation.ui.theme.textStyleCurrentTemperature
 import com.rishirajput.weather.presentation.ui.theme.textStyleLoationName
-import highlightedBackGround
-import androidx.compose.ui.Alignment
 import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
+import highlightedBackGround
 
+/**
+ * Composable function to display a card with weather information for a location.
+ *
+ * @param weatherData The weather data to display.
+ * @param onClick The action to perform when the card is clicked.
+ */
 @Composable
 fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
     Row(
@@ -56,6 +62,9 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
     }
 }
 
+/**
+ * Preview function for LocationResultCard composable.
+ */
 @Preview(showBackground = true)
 @Composable
 fun PreviewLocationResult() {
