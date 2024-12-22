@@ -7,6 +7,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
 
@@ -40,4 +42,38 @@ fun LocationResults(
             )
         }
     }
+}
+
+/**
+ * Preview function for LocationResults composable.
+ */
+@Preview(showBackground = true)
+@Composable
+fun PreviewLocationResults() {
+    val dummyWeatherDataList = listOf(
+        WeatherData(
+            locationName = "Hyderabad",
+            temperature = 31.0,
+            condition = "Patchy rain nearby",
+            icon = "//cdn.weatherapi.com/weather/64x64/night/176.png",
+            humidity = 76,
+            uvIndex = 4.0,
+            feelsLike = 30.4
+        ),
+        WeatherData(
+            locationName = "Mumbai",
+            temperature = 29.0,
+            condition = "Clear",
+            icon = "//cdn.weatherapi.com/weather/64x64/night/113.png",
+            humidity = 80,
+            uvIndex = 5.0,
+            feelsLike = 32.0
+        )
+    )
+    val focusManager = LocalFocusManager.current
+    LocationResults(
+        searchResults = dummyWeatherDataList,
+        onLocationClick = {},
+        focusManager = focusManager
+    )
 }
