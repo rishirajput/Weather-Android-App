@@ -1,22 +1,21 @@
 package com.rishirajput.data.di
 
-
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.rishirajput.data.serializer.WeatherDataSerializer
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.repository.DataStoreRepository
 import com.rishirajput.data.repository.RetrofitWeatherRepository
+import com.rishirajput.data.serializer.WeatherDataSerializer
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.LocalStorageRepository
 import com.rishirajput.domain.repository.WeatherRepository
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
+import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
-import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -25,7 +24,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
-
+/**
+ * Koin module for providing data-related dependencies.
+ */
 val dataModule = module {
     single { provideRetrofit().create(WeatherApiService::class.java) }
     single<WeatherRepository> { RetrofitWeatherRepository(get()) }
@@ -63,4 +64,3 @@ fun provideDataStore(context: Context): DataStore<WeatherData?> {
         produceFile = { context.dataStoreFile("weather_data.pb") }
     )
 }
-
