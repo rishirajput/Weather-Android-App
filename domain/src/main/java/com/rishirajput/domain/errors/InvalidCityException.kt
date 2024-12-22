@@ -1,3 +1,8 @@
 package com.rishirajput.domain.errors
 
-class InvalidCityException(message: String = "") : Exception(message)
+/**
+ * Exception thrown when an invalid city is encountered.
+ *
+ * @param message The detail message for this exception.
+ */
+class InvalidCityException(message: String = "Invalid city provided.") : Exception(message)
