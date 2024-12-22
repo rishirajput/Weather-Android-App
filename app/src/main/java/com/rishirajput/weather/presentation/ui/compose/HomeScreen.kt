@@ -28,6 +28,11 @@ import com.rishirajput.weather.presentation.ui.theme.appBackgroundColor
 import com.rishirajput.weather.presentation.ui.viewmodel.WeatherViewModel
 import org.koin.androidx.compose.getViewModel
 
+/**
+ * Composable function to display the home screen of the weather app.
+ *
+ * @param innerPadding The padding values to be applied to the screen.
+ */
 @Composable
 fun HomeScreen(innerPadding: PaddingValues) {
     val viewModel: WeatherViewModel = getViewModel()
@@ -60,6 +65,17 @@ fun HomeScreen(innerPadding: PaddingValues) {
     }
 }
 
+/**
+ * Composable function to display the content of the home screen.
+ *
+ * @param searchQuery The current search query.
+ * @param searchResults The list of search results.
+ * @param storedWeatherData The stored weather data.
+ * @param isLoading A boolean indicating if the data is loading.
+ * @param onSearch A lambda function to handle search actions.
+ * @param onLocationClick A lambda function to handle location click actions.
+ * @param focusManager The focus manager to handle focus actions.
+ */
 @Composable
 fun HomeScreenContent(
     searchQuery: String,
