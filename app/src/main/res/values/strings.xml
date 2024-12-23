@@ -8,4 +8,11 @@
     <string name="not_found_error">Error! Data Not Found.</string>
     <string name="invalid_city_name">Invalid City Name</string>
     <string name="degree_icon">Degree Icon</string>
+    <string name="error">Error: %1$s</string>
+    <string name="location_icon">Location Icon</string>
+    <string name="weather_icon">Weather Icon</string>
+    <string name="search_icon">Search Icon</string>
+    <string name="humidity">Humidity</string>
+    <string name="uv">UV</string>
+    <string name="feels_like">Feels Like</string>
 </resources>

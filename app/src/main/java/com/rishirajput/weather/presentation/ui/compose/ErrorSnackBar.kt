@@ -26,7 +26,7 @@ fun ErrorSnackBar(snackBarHostState: SnackbarHostState, errorFlow: Flow<Throwabl
             val errorMessage = when (error) {
                 is NoNetworkException -> context.getString(R.string.network_error)
                 is InvalidCityException -> context.getString(R.string.invalid_city_name)
-                else -> "".also { Log.e("Exception", "Error: $error") }
+                else -> "".also { Log.e("Exception", context.getString(R.string.error, error)) }
             }
             if (errorMessage.isNotEmpty()) {
                 snackBarHostState.showSnackbar(errorMessage)

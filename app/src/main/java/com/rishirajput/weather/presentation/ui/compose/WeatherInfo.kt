@@ -6,9 +6,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.domain.model.WeatherData
+import com.rishirajput.weather.R
 
 /**
  * Composable function to display weather information.
@@ -25,9 +27,9 @@ fun WeatherInfo(weatherData: WeatherData, modifier: Modifier = Modifier) {
             .padding(16.dp),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        WeatherFieldInfo(label = "Humidity", value = "${weatherData.humidity}%")
-        WeatherFieldInfo(label = "UV", value = "${weatherData.uvIndex}")
-        WeatherFieldInfo(label = "Feels Like", value = "${weatherData.feelsLike}°")
+        WeatherFieldInfo(label = stringResource(R.string.humidity), value = "${weatherData.humidity}%")
+        WeatherFieldInfo(label = stringResource(R.string.uv), value = "${weatherData.uvIndex}")
+        WeatherFieldInfo(label = stringResource(R.string.feels_like), value = "${weatherData.feelsLike}°")
     }
 }
 

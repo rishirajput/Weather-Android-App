@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rishirajput.weather.R
@@ -33,7 +34,7 @@ fun LocationName(locationName: String, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.width(11.dp))
         Image(
             painter = painterResource(id = R.drawable.location_icon),
-            contentDescription = "Location Icon",
+            contentDescription = stringResource(R.string.location_icon),
             modifier = Modifier
                 .width(21.dp)
                 .height(21.dp)
