@@ -5,4 +5,4 @@ package com.rishirajput.domain.errors
  *
  * @param message The detail message for this exception.
  */
-class InvalidCityException(message: String = "Invalid city provided.") : Exception(message)
+class InvalidCityException(message: String = "Invalid city name provided.") : Exception(message)
