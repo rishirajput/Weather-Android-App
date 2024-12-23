@@ -51,19 +51,12 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
                 textStyle = textStyleCurrentTemperature
             )
         }
-        val painter = rememberAsyncImagePainter(
-            model = updateImageSizeInUrl(
-                "https:${weatherData.icon}",
-                128
-            )
-        )
-        Image(
-            painter = painter,
-            contentDescription = stringResource(R.string.weather_icon),
+        WeatherStatusIcon(
+            iconUrl = weatherData.icon,
             modifier = Modifier
                 .height(110.dp)
                 .width(110.dp)
-                .padding(bottom = 8.dp),
+                .padding(bottom = 8.dp)
         )
     }
 }
