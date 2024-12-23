@@ -1,6 +1,5 @@
 package com.rishirajput.weather.presentation.ui.compose
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,15 +12,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
 import com.rishirajput.domain.model.WeatherData
-import com.rishirajput.weather.R
 import com.rishirajput.weather.presentation.ui.theme.textStyleCurrentTemperature
 import com.rishirajput.weather.presentation.ui.theme.textStyleLocationName
-import com.rishirajput.weather.presentation.ui.utils.updateImageSizeInUrl
 
 /**
  * Composable function to display a card with weather information for a location.
