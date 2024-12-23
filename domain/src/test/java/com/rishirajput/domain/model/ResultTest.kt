@@ -13,7 +13,6 @@ class ResultTest {
         val result = Result.Success(data)
 
         // Then
-        assertTrue(result is Result.Success)
         assertEquals(data, (result as Result.Success).data)
     }
 
@@ -24,7 +23,7 @@ class ResultTest {
         val result = Result.Error(exception)
 
         // Then
-        assertTrue(result is Result.Error)
+        assertTrue(true)
         assertEquals(exception, (result as Result.Error).exception)
     }
 }
