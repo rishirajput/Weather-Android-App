@@ -1,8 +1,6 @@
 package com.rishirajput.data.repository
 
-import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
-import com.rishirajput.data.utils.Constants
 import com.rishirajput.domain.errors.InvalidCityException
 import com.rishirajput.domain.errors.NoNetworkException
 import com.rishirajput.domain.model.Location
@@ -16,17 +14,18 @@ import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
 
-/**
- * Repository for fetching weather data using Retrofit.
- */
-class RetrofitWeatherRepository(private val apiService: WeatherApiService) : WeatherRepository {
+class RetrofitWeatherRepository(
+    private val apiService: WeatherApiService,
+    private val apiKey: String,
+    private val debounceDelay: Long
+) : WeatherRepository {
 
     override suspend fun getWeatherData(query: String): Result<List<WeatherData>> {
         if (query.isEmpty()) {
             return Result.Success(emptyList())
         }
 
-        delay(Constants.DEBOUNCE_DELAY)
+        delay(debounceDelay)
 
         return withContext(Dispatchers.IO) {
             try {
@@ -57,7 +56,7 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
 
     override suspend fun getLocations(query: String): Result<List<Location>> {
         return try {
-            val response = apiService.searchLocation(BuildConfig.WEATHER_API_KEY, query)
+            val response = apiService.searchLocation(apiKey, query)
             handleResponse(response) { it }
         } catch (e: IOException) {
             Result.Error(NoNetworkException())
@@ -68,7 +67,7 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
 
     override suspend fun getWeatherDataForLocation(locationName: String): Result<WeatherData> {
         return try {
-            val response = apiService.getCurrentWeather(BuildConfig.WEATHER_API_KEY, locationName)
+            val response = apiService.getCurrentWeather(apiKey, locationName)
             handleResponse(response) { weatherResponse ->
                 val current = weatherResponse.current
                 WeatherData(

@@ -5,10 +5,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.repository.DataStoreRepository
 import com.rishirajput.data.repository.RetrofitWeatherRepository
 import com.rishirajput.data.serializer.WeatherDataSerializer
+import com.rishirajput.data.utils.Constants
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.repository.LocalStorageRepository
 import com.rishirajput.domain.repository.WeatherRepository
@@ -29,7 +31,7 @@ import retrofit2.Retrofit
  */
 val dataModule = module {
     single { provideRetrofit().create(WeatherApiService::class.java) }
-    single<WeatherRepository> { RetrofitWeatherRepository(get()) }
+    single<WeatherRepository> { RetrofitWeatherRepository(get(), BuildConfig.WEATHER_API_KEY, Constants.DEBOUNCE_DELAY) }
     single<DataStore<WeatherData?>> { provideDataStore(get()) }
     single<LocalStorageRepository> { DataStoreRepository(get()) }
     single { FetchWeatherDataUseCase(get()) }
