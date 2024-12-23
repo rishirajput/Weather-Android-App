@@ -42,20 +42,6 @@ To provide the Weather API key, you have the following options:
     ./gradlew assembleDebug -PweatherApiKey=YOUR_API_KEY
     ```
 
-### Configure Gradle
-
-Ensure that your `build.gradle` file is configured to read the API key from the command line options or `local.properties` file:
-
-```groovy
-android {
-    // Other configurations...
-
-    defaultConfig {
-        buildConfigField "String", "WEATHER_API_KEY", "\"${project.hasProperty('weatherApiKey') ? project.weatherApiKey : 'YOUR_DEFAULT_API_KEY'}\""
-    }
-}
-```
-
 ### Build and Run the Project
 
 1. Open the project in Android Studio.
