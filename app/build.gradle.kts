@@ -64,6 +64,7 @@ dependencies {
     // Testing dependencies
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.koin.test)
     androidTestImplementation(libs.koin.test.junit4)
     androidTestImplementation(libs.androidx.junit)
