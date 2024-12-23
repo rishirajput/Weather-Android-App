@@ -6,7 +6,7 @@ import com.rishirajput.domain.model.Result
 import com.rishirajput.domain.model.WeatherData
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
-import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
+import com.rishirajput.domain.usecase.GetStoredWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 class WeatherViewModel(
     private val fetchWeatherDataUseCase: FetchWeatherDataUseCase,
     private val storeWeatherDataUseCase: StoreWeatherDataUseCase,
-    private val getSelectedWeatherDataUseCase: GetSelectedWeatherDataUseCase,
+    private val getStoredWeatherDataUseCase: GetStoredWeatherDataUseCase,
     private val getCurrentWeatherDataUseCase: GetCurrentWeatherDataUseCase
 ) : ViewModel() {
 
@@ -41,7 +41,7 @@ class WeatherViewModel(
 
     init {
         viewModelScope.launch {
-            _storedWeatherData.value = getSelectedWeatherDataUseCase()
+            _storedWeatherData.value = getStoredWeatherDataUseCase()
             when (val result = getCurrentWeatherDataUseCase(_storedWeatherData.value)) {
                 is Result.Success -> _storedWeatherData.value = result.data
                 is Result.Error -> _errorFlow.emit(result.exception)

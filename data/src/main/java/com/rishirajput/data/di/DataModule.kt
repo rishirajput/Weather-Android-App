@@ -14,7 +14,7 @@ import com.rishirajput.domain.repository.LocalStorageRepository
 import com.rishirajput.domain.repository.WeatherRepository
 import com.rishirajput.domain.usecase.FetchWeatherDataUseCase
 import com.rishirajput.domain.usecase.GetCurrentWeatherDataUseCase
-import com.rishirajput.domain.usecase.GetSelectedWeatherDataUseCase
+import com.rishirajput.domain.usecase.GetStoredWeatherDataUseCase
 import com.rishirajput.domain.usecase.StoreWeatherDataUseCase
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -34,7 +34,7 @@ val dataModule = module {
     single<LocalStorageRepository> { DataStoreRepository(get()) }
     single { FetchWeatherDataUseCase(get()) }
     single { StoreWeatherDataUseCase(get()) }
-    single { GetSelectedWeatherDataUseCase(get()) }
+    single { GetStoredWeatherDataUseCase(get()) }
     single { GetCurrentWeatherDataUseCase(get()) }
 }
 

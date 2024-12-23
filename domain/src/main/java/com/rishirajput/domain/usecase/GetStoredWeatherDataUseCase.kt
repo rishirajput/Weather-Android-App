@@ -8,7 +8,7 @@ import com.rishirajput.domain.repository.LocalStorageRepository
  *
  * @property localStorageRepository The repository to retrieve weather data from.
  */
-class GetSelectedWeatherDataUseCase(private val localStorageRepository: LocalStorageRepository) {
+class GetStoredWeatherDataUseCase(private val localStorageRepository: LocalStorageRepository) {
 
     /**
      * Invokes the use case to retrieve the selected weather data.
