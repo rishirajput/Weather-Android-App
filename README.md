@@ -24,16 +24,20 @@ cd weather-app
 
 ### Provide Weather API Key
 
-To provide the Weather API key via Gradle command line options, follow these steps:
+To provide the Weather API key, you have the following options:
 
-1. Open `local.properties` file in the root of your project and add the following line:
+1. **Via Android Studio Settings**:
+    - Go to `Android Studio -> Settings -> Build, Execution, Deployment -> Gradle-Android-Compiler`
+    - Enter the following in the command line options: `-PweatherApiKey=YOUR_API_KEY`
 
+2. **Via `local.properties` File**:
+    - Open `local.properties` file in the root of your project and add the following line:
     ```properties
     weatherApiKey=YOUR_API_KEY
     ```
 
-2. Alternatively, you can pass the API key as a command line option when building or running the project:
-
+3. **Via Command Line**:
+    - Pass the API key as a command line option when building or running the project:
     ```sh
     ./gradlew assembleDebug -PweatherApiKey=YOUR_API_KEY
     ```
@@ -58,6 +62,37 @@ android {
 2. Sync the project with Gradle files.
 3. Build and run the project on an emulator or physical device.
 
+## Architecture
+
+This project follows Clean Architecture principles with MVVM (Model-View-ViewModel) pattern to ensure clean, modular, and testable code. The architecture is divided into three main layers:
+
+1. **Presentation Layer**: Contains UI components and ViewModels.
+2. **Domain Layer**: Contains business logic and use cases.
+3. **Data Layer**: Contains data sources and repositories.
+
+### Presentation Layer
+
+- **ViewModel**: Manages UI-related data and handles user interactions.
+- **Composable Functions**: Define the UI components using Jetpack Compose.
+
+### Domain Layer
+
+- **Use Cases**: Encapsulate business logic and interact with repositories.
+- **Entities**: Represent core business objects.
+
+### Data Layer
+
+- **Repositories**: Provide data from various sources (e.g., network, database).
+- **Data Sources**: Handle data operations (e.g., API calls, database queries).
+
+### Example
+
+Here is an example of how the layers interact:
+
+- **ViewModel**: Fetches weather data using a use case and exposes it to the UI.
+- **Use Case**: Retrieves weather data from the repository.
+- **Repository**: Fetches weather data from a remote data source (e.g., API).
+
 ## Testing
 
 ### Unit Tests
@@ -75,75 +110,6 @@ To run UI tests, use the following command:
 ```sh
 ./gradlew connectedAndroidTest
 ```
-
-### Test Coverage
-
-To generate a test coverage report using JaCoCo, follow these steps:
-
-1. Add the JaCoCo plugin to your `build.gradle` file:
-
-    ```groovy
-    plugins {
-        id 'jacoco'
-    }
-    ```
-
-2. Configure JaCoCo in your `build.gradle` file:
-
-    ```groovy
-    jacoco {
-        toolVersion = "0.8.7"
-    }
-
-    android {
-        // Other configurations...
-
-        testOptions {
-            unitTests.all {
-                jacoco {
-                    includeNoLocationClasses = true
-                }
-            }
-        }
-    }
-
-    tasks.withType(Test) {
-        jacoco.includeNoLocationClasses = true
-        jacoco.excludes = ['jdk.internal.*']
-    }
-    ```
-
-3. Create a task to generate the JaCoCo report:
-
-    ```groovy
-    task jacocoTestReport(type: JacocoReport) {
-        dependsOn 'testDebugUnitTest'
-
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
-
-        def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*']
-        def debugTree = fileTree(dir: "$buildDir/tmp/kotlin-classes/debug", excludes: fileFilter)
-        def mainSrc = "$projectDir/src/main/java"
-
-        sourceDirectories.setFrom(files([mainSrc]))
-        classDirectories.setFrom(files([debugTree]))
-        executionData.setFrom(fileTree(dir: "$buildDir", includes: [
-                'jacoco/testDebugUnitTest.exec',
-                'outputs/code-coverage/connected/*coverage.ec'
-        ]))
-    }
-    ```
-
-4. Run the tests and generate the coverage report:
-
-    ```sh
-    ./gradlew testDebugUnitTest jacocoTestReport
-    ```
-
-The coverage report will be generated in the `build/reports/jacoco/jacocoTestReport/html` directory. Open the `index.html` file in a browser to view the coverage report.
 
 ## License
 
