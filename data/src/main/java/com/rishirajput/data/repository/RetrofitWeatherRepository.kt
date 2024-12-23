@@ -1,6 +1,5 @@
 package com.rishirajput.data.repository
 
-import android.util.Log
 import com.rishirajput.data.BuildConfig
 import com.rishirajput.data.api.WeatherApiService
 import com.rishirajput.data.utils.Constants
@@ -85,7 +84,6 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
         } catch (e: IOException) {
             Result.Error(NoNetworkException())
         } catch (e: Exception) {
-            Log.e("RetrofitWeatherRepository", "Error fetching weather data", e)
             Result.Error(e)
         }
     }
@@ -96,7 +94,6 @@ class RetrofitWeatherRepository(private val apiService: WeatherApiService) : Wea
                 Result.Success(transform(it))
             } ?: Result.Error(HttpException(response))
         } else {
-            Log.e("RetrofitWeatherRepository", "HTTP error: ${response.code()} ${response.message()}")
             Result.Error(HttpException(response))
         }
     }
