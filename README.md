@@ -2,8 +2,8 @@
 
 <div style="display: flex; justify-content: space-between;">
     <img src="screenshots/Weather_Splash.png" alt="Splash Screen" width="300"/>
-    <img src="screenshots/Weather_Home" alt="Home Screen" width="300"/>
-    <img src="screenshots/Weather_Search" alt="Search Screen" width="300"/>
+    <img src="screenshots/Weather_Home.png" alt="Home Screen" width="300"/>
+    <img src="screenshots/Weather_Search.png" alt="Search Screen" width="300"/>
 </div>
 
 # Weather App
