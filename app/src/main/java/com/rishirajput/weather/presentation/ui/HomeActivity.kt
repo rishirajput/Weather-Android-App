@@ -17,7 +17,7 @@ import com.rishirajput.weather.presentation.ui.compose.HomeScreen
 /**
  * Main activity that hosts the home screen of the weather app.
  */
-class MainActivity : ComponentActivity() {
+class HomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
