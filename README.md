@@ -18,7 +18,7 @@ This is a Weather App built using Jetpack Compose, Kotlin, and Android Studio. T
 ### Clone the Repository
 
 ```sh
-git clone https://github.com/rishirajput/weather-app.git
+git clone https://github.com/rishirajput/Weather-Android-App
 cd weather-app
 ```
 
