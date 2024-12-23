@@ -11,6 +11,7 @@ activityCompose = "1.9.3"
 composeBom = "2024.12.01"
 retrofit = "2.9.0"
 koin = "3.4.0"
+koinTest = "3.4.0"
 kotlinxSerialization = "1.7.3"
 retrofitKotlinxSerialization = "0.8.0"
 okhttp = "4.12.0"
@@ -45,6 +46,8 @@ retrofit-kotlinx-serialization = { group = "com.jakewharton.retrofit", name = "r
 koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin" }
 koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
+koin-test = { group = "io.insert-koin", name = "koin-test", version.ref = "koinTest" }
+koin-test-junit4 = { group = "io.insert-koin", name = "koin-test-junit4", version.ref = "koinTest" }
 okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 okhttp-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLoggingInterceptor" }
