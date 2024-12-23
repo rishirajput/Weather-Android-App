@@ -79,6 +79,12 @@ Here is an example of how the layers interact:
 - **Use Case**: Retrieves weather data from the repository.
 - **Repository**: Fetches weather data from a remote data source (e.g., API).
 
+No, the usage of dependency injection via Koin is not mentioned in the provided README. If you want to include it, you can add a section like this:
+
+### Dependency Injection
+
+This project uses Koin for dependency injection.
+
 ## Testing
 
 ### Unit Tests
