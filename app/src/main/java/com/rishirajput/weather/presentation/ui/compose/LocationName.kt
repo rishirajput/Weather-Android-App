@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,7 +30,8 @@ fun LocationName(locationName: String, modifier: Modifier = Modifier) {
     ) {
         Text(
             text = locationName,
-            style = textStyleCityName
+            style = textStyleCityName,
+            modifier = Modifier.widthIn(max = 268.dp)
         )
         Spacer(modifier = Modifier.width(11.dp))
         Image(
@@ -49,5 +51,5 @@ fun LocationName(locationName: String, modifier: Modifier = Modifier) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLocationName() {
-    LocationName(locationName = "Hyderabad")
+    LocationName(locationName = "YoriCostio (La Villita)")
 }
