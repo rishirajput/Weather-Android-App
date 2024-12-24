@@ -42,7 +42,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
             )
             CurrentTemperature(
                 temperature = weatherData.temperature,
-                modifier = Modifier.align(Alignment.CenterHorizontally),
+                modifier = Modifier.align(Alignment.Start),
                 textStyle = textStyleCurrentTemperature
             )
         }
@@ -63,7 +63,7 @@ fun LocationResultCard(weatherData: WeatherData, onClick: () -> Unit) {
 @Composable
 fun PreviewLocationResult() {
     val dummyWeatherData = WeatherData(
-        locationName = "LakeFront Airport",
+        locationName = "YoriCostio (La Villita)",
         temperature = 27.3,
         condition = "Patchy rain nearby",
         icon = "//cdn.weatherapi.com/weather/64x64/night/176.png",
